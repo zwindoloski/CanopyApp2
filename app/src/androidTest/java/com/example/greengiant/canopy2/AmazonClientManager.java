@@ -36,7 +36,10 @@ public class AmazonClientManager {
     public void initClients() {
         CognitoCachingCredentialsProvider credentials = new CognitoCachingCredentialsProvider(
                 context,
+                Constants.ACCOUNT_ID,
                 Constants.IDENTITY_POOL_ID,
+                Constants.UNAUTH_ROLE_ARN,
+                null,
                 Regions.US_EAST_1);
 
         ddb = new AmazonDynamoDBClient(credentials);
