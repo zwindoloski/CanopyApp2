@@ -26,4 +26,22 @@ public class DynamoDBManager {
         }
         return resultList;
     }
+
+    public static Shade getShade(int id){
+
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        Shade shade = mapper.load(Shade.class, id);
+
+        return shade;
+    }
+
+    public static void updateShade(Shade shade){
+
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        mapper.save(shade);
+    }
 }

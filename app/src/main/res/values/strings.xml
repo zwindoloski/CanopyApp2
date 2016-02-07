@@ -4,4 +4,14 @@
     <string name="list_rooms">View All Rooms</string>
     <string name="add_shade">Add Shade</string>
     <string name="add_room">Add Room</string>
+    <string name="shade_position">Shade Position</string>
+    <string name="current_voltage">Current Voltage</string>
+
+    <string-array name="shade_positions">
+        <item>Open</item>
+        <item>Closed</item>
+        <item>Half Closed Up</item>
+        <item>Half Closed Down</item>
+    </string-array>
+
 </resources>

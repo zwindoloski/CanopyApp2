@@ -2,10 +2,12 @@ package com.example.greengiant.canopy2;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,13 @@ public class ShadeListActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new GetShadeListTask().execute();
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id){
+        Intent intent = new Intent(ShadeListActivity.this, ShadeActivity.class);
+        intent.putExtra("SHADE_ID", items.get(position).getId() + "");
+        startActivity(intent);
     }
 
     private class GetShadeListTask extends AsyncTask<Void,Void, Void>{
