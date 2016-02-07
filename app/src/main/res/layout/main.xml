@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/list_shades_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/list_shades"/>
+
+        <Button
+            android:id="@+id/add_shades_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/add_shade"/>
+
+        <Button
+            android:id="@+id/list_rooms_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/list_rooms"/>
+
+        <Button
+            android:id="@+id/add_rooms_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/add_room"/>
+    </LinearLayout>
+</LinearLayout>

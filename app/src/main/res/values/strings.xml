@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Canopy2</string>
+    <string name="app_name">Canopy</string>
+    <string name="list_shades">View All Shades</string>
+    <string name="list_rooms">View All Rooms</string>
+    <string name="add_shade">Add Shade</string>
+    <string name="add_room">Add Room</string>
 </resources>
