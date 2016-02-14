@@ -20,7 +20,7 @@ public class DynamoDBManager {
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Shade> result = mapper.scan(
             Shade.class, scanExpression);
-        ArrayList<Shade> resultList = new ArrayList<Shade>();
+        ArrayList<Shade> resultList = new ArrayList<>();
         for (Shade shade : result) {
             resultList.add(shade);
         }
@@ -32,9 +32,7 @@ public class DynamoDBManager {
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
-        Shade shade = mapper.load(Shade.class, id);
-
-        return shade;
+        return mapper.load(Shade.class, id);
     }
 
     public static void updateShade(Shade shade){
@@ -43,5 +41,35 @@ public class DynamoDBManager {
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
         mapper.save(shade);
+    }
+
+    public static ArrayList<Room> getRoomList(){
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Room> result = mapper.scan(
+                Room.class, scanExpression);
+        ArrayList<Room> resultList = new ArrayList<>();
+        for (Room room : result) {
+            resultList.add(room);
+        }
+        return resultList;
+    }
+
+    public static Room getRoom(int id){
+
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        return mapper.load(Room.class, id);
+    }
+
+    public static void updateRoom(Room room){
+
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        mapper.save(room);
     }
 }

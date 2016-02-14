@@ -10,7 +10,6 @@ public class Shade {
     private String status;
     private int id;
     private double voltage;
-    private int createdAt;
 
     @DynamoDBHashKey(attributeName = "id")
     public int getId(){
@@ -19,15 +18,6 @@ public class Shade {
 
     public void setId(int id){
         this.id = id;
-    }
-
-    @DynamoDBAttribute(attributeName = "created_at")
-    public int getCreatedAt(){
-        return createdAt;
-    }
-
-    public void setCreatedAt(int createdAt){
-        this.createdAt = createdAt;
     }
 
     @DynamoDBAttribute(attributeName = "name")

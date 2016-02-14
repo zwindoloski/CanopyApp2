@@ -14,9 +14,13 @@
             </intent-filter>
         </activity>
         <activity android:name="ShadeListActivity"
-            android:configChanges="orientation|keyboardHidden"></activity>
+            android:configChanges="orientation|keyboardHidden"/>
         <activity android:name="ShadeActivity"
-            android:configChanges="orientation|keyboardHidden"></activity>
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name="RoomListActivity"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name="RoomActivity"
+            android:configChanges="orientation|keyboardHidden"/>
     </application>
 
 </manifest>

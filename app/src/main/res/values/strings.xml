@@ -6,6 +6,7 @@
     <string name="add_room">Add Room</string>
     <string name="shade_position">Shade Position</string>
     <string name="current_voltage">Current Voltage</string>
+    <string name="your_settings">Your Settings</string>
 
     <string-array name="shade_positions">
         <item>Open</item>

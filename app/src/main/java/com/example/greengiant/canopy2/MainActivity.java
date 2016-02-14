@@ -27,6 +27,13 @@ public class MainActivity extends Activity{
                 new DynamoDBManagerTask().execute(DynamoDBManagerType.LIST_SHADES);
             }
         });
+
+        final Button listRoomsButton = (Button) findViewById(R.id.list_rooms_bttn);
+        listRoomsButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick( View v){
+                new DynamoDBManagerTask().execute(DynamoDBManagerType.LIST_ROOMS);
+            }
+        });
     }
 
     private class DynamoDBManagerTask extends
@@ -41,18 +48,24 @@ public class MainActivity extends Activity{
             if(types[0] == DynamoDBManagerType.LIST_SHADES){
                 DynamoDBManager.getShadeList();
             }
+            else if (types[0] == DynamoDBManagerType.LIST_ROOMS){
+                DynamoDBManager.getRoomList();
+            }
 
             return result;
         }
 
         protected void onPostExecute(DynamoDBManagerTaskResult result){
-            if (result.getTaskType() == DynamoDBManagerType.LIST_SHADES){
+            if (result.getTaskType() == DynamoDBManagerType.LIST_SHADES) {
                 startActivity(new Intent(MainActivity.this, ShadeListActivity.class));
+            }
+            else if (result.getTaskType() == DynamoDBManagerType.LIST_ROOMS){
+                startActivity(new Intent(MainActivity.this, RoomListActivity.class));
             }
         }
     }
     private enum DynamoDBManagerType {
-        LIST_SHADES
+        LIST_SHADES, LIST_ROOMS
     }
 
     private class DynamoDBManagerTaskResult {
