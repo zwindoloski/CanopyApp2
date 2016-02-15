@@ -58,4 +58,6 @@ public class Room {
         this.behavior_id = behavior_id;
     }
 
+    public String toString(){return name;}
+
 }
