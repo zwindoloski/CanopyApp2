@@ -27,7 +27,7 @@ public class DynamoDBManager {
         return resultList;
     }
 
-    public static Shade getShade(int id){
+    public static Shade getShade(String id){
 
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
@@ -57,7 +57,7 @@ public class DynamoDBManager {
         return resultList;
     }
 
-    public static Room getRoom(int id){
+    public static Room getRoom(String id){
 
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);

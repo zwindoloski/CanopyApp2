@@ -28,10 +28,24 @@ public class MainActivity extends Activity{
             }
         });
 
+        final Button createShadeButton = (Button) findViewById(R.id.add_shades_bttn);
+        createShadeButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick( View v){
+                new DynamoDBManagerTask().execute(DynamoDBManagerType.CREATE_SHADE);
+            }
+        });
+
         final Button listRoomsButton = (Button) findViewById(R.id.list_rooms_bttn);
         listRoomsButton.setOnClickListener(new View.OnClickListener(){
             public void onClick( View v){
                 new DynamoDBManagerTask().execute(DynamoDBManagerType.LIST_ROOMS);
+            }
+        });
+
+        final Button createRoomButton = (Button) findViewById(R.id.add_rooms_bttn);
+        createRoomButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick( View v){
+                new DynamoDBManagerTask().execute(DynamoDBManagerType.CREATE_ROOM);
             }
         });
 
@@ -74,10 +88,16 @@ public class MainActivity extends Activity{
             else if (result.getTaskType() == DynamoDBManagerType.USER_SETTINGS){
                 startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
             }
+            else if (result.getTaskType() == DynamoDBManagerType.CREATE_ROOM){
+                startActivity(new Intent(MainActivity.this, CreateRoomActivity.class));
+            }
+            else if (result.getTaskType() == DynamoDBManagerType.CREATE_SHADE){
+                startActivity(new Intent(MainActivity.this, CreateShadeActivity.class));
+            }
         }
     }
     private enum DynamoDBManagerType {
-        LIST_SHADES, LIST_ROOMS, USER_SETTINGS
+        LIST_SHADES, LIST_ROOMS, USER_SETTINGS, CREATE_ROOM, CREATE_SHADE
     }
 
     private class DynamoDBManagerTaskResult {

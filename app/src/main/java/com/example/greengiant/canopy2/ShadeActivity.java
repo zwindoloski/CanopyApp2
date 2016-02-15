@@ -16,7 +16,7 @@ import com.amazonaws.auth.policy.Resource;
  */
 public class ShadeActivity extends Activity {
 
-    private int shadeId = 0;
+    private String shadeId = "";
     private Shade shade = null;
 
     @Override
@@ -25,7 +25,7 @@ public class ShadeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shade);
 
-        shadeId = Integer.valueOf(getIntent().getExtras().getString("SHADE_ID"));
+        shadeId = getIntent().getExtras().getString("SHADE_ID");
         new GetShadeTask().execute();
     }
 

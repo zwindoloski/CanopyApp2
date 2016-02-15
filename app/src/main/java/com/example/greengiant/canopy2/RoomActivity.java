@@ -13,7 +13,7 @@ import android.widget.TextView;
  * Created by Zack on 2/13/2016.
  */
 public class RoomActivity extends Activity {
-    private int roomId = 0;
+    private String roomId = "";
     private Room room = null;
 
     @Override
@@ -22,7 +22,7 @@ public class RoomActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room);
 
-        roomId = Integer.valueOf(getIntent().getExtras().getString("ROOM_ID"));
+        roomId = getIntent().getExtras().getString("ROOM_ID");
         new GetRoomTask().execute();
     }
 

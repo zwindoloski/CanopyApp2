@@ -7,6 +7,15 @@
     <string name="shade_position">Shade Position</string>
     <string name="current_voltage">Current Voltage</string>
     <string name="your_settings">Your Settings</string>
+    <string name="create_new_room">Create New Room</string>
+    <string name="room_name">Room Name</string>
+    <string name="new_room_hint">Name of New Room</string>
+    <string name="create">Create</string>
+    <string name="blank_room_name_toast">Room Name cannot be blank.</string>
+    <string name="create_new_shade">Create New Shade</string>
+    <string name="shade_name">Shade Name</string>
+    <string name="new_shade_hint">Name of New Shade</string>
+    <string name="blank_shade_name_error_toast">Shade Name cannot be blank.</string>
 
     <string-array name="shade_positions">
         <item>Open</item>
