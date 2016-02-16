@@ -8,6 +8,7 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 public class Shade {
     private String name;
     private String status;
+    private String run_mode;
     private String id;
     private double voltage;
     private boolean away;
@@ -116,5 +117,14 @@ public class Shade {
 
     public void setRoom_id(String room_id) {
         this.room_id = room_id;
+    }
+
+    @DynamoDBAttribute(attributeName = "run_mode")
+    public String getRun_mode() {
+        return run_mode;
+    }
+
+    public void setRun_mode(String run_mode) {
+        this.run_mode = run_mode;
     }
 }
