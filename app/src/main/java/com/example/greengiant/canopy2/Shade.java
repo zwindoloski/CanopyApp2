@@ -127,4 +127,8 @@ public class Shade {
     public void setRun_mode(String run_mode) {
         this.run_mode = run_mode;
     }
+
+    public String toString(){
+        return name;
+    }
 }

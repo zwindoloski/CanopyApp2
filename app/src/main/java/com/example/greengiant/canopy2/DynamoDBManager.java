@@ -86,4 +86,11 @@ public class DynamoDBManager {
 
         mapper.save(user);
     }
+
+    public static void updateSchedule(Schedule schedule){
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        mapper.save(schedule);
+    }
 }

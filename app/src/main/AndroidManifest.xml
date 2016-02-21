@@ -27,6 +27,15 @@
             android:configChanges="orientation"/>
         <activity android:name="UserSettingsActivity"
             android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name="CreateScheduleActivity"
+            android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name="CreateShadeScheduleActivity"
+            android:configChanges="orientation"/>
+        <activity android:name="CreateRoomScheduleActivity"
+            android:configChanges="orientation"/>
+        <activity android:name="CreateHomeScheduleActivity"
+            android:configChanges="orientation"/>
     </application>
+
 
 </manifest>
