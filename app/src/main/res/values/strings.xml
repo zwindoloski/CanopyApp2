@@ -17,12 +17,41 @@
     <string name="new_shade_hint">Name of New Shade</string>
     <string name="blank_shade_name_error_toast">Shade Name cannot be blank.</string>
     <string name="select_room">Select Room</string>
+    <string name="run_mode">Run Mode</string>
+    <string name="add_schedule">Add Schedule</string>
+    <string name="shade">Shade</string>
+    <string name="user">User</string>
+    <string name="room">Room</string>
+    <string name="select_schedule_object">Select what you would like to attatch the schedule to.</string>
+    <string name="new_schedule">New Schedule</string>
+    <string name="schedule_name">Schedule Name</string>
+    <string name="enter_schedule_name">Enter Name of Schedule</string>
+    <string name="day_of_week">Day of Week</string>
+    <string name="start_time">Start Time</string>
+    <string name="bank_schedule_name_error">Schedule Name cannot be blank.</string>
+    <string name="home">Home</string>
 
     <string-array name="shade_positions">
         <item>Open</item>
         <item>Closed</item>
         <item>Half Closed Up</item>
         <item>Half Closed Down</item>
+    </string-array>
+
+    <string-array name="run_mode">
+        <item>Manual</item>
+        <item>Energy Saving</item>
+        <item>Schedule</item>
+    </string-array>
+
+    <string-array name="days_of_week">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
     </string-array>
 
 </resources>

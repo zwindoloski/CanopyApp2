@@ -34,6 +34,7 @@ public class CreateShadeActivity extends Activity {
         roomArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roomSpinner.setAdapter(roomArrayAdapter);
 
+        final Spinner modeSpinner = (Spinner) findViewById(R.id.spinnerShadeModeCreate);
         final EditText shadeNameET = (EditText) findViewById(R.id.create_shade_edit_text);
         final Button createShadeButton = (Button) findViewById(R.id.new_shade_create_bttn);
         createShadeButton.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +50,7 @@ public class CreateShadeActivity extends Activity {
                     shade.setUser_id(10);
                     shade.setAway(true);
                     shade.setStatus("Open");
+                    shade.setRun_mode(modeSpinner.getSelectedItem().toString());
                     new CreateShadeTask().execute();
                 }
             }

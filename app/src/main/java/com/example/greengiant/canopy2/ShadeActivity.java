@@ -49,12 +49,39 @@ public class ShadeActivity extends Activity {
                 }
             }
         }
+
+        final Spinner spinnerRunMode = (Spinner) findViewById(R.id.spinnerShadeMode);
+        if (shade.getRun_mode() != null) {
+            Resources res = getResources();
+            String[] positions = res.getStringArray(R.array.run_mode);
+            for (int i=0; i<positions.length;i++){
+                if (positions[i].equalsIgnoreCase(shade.getStatus())){
+                    spinnerShadePosition.setSelection(i,true);
+                }
+            }
+        }
+
         spinnerShadePosition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Resources res = getResources();
                 String[] positions = res.getStringArray(R.array.shade_positions);
                 shade.setStatus(positions[position]);
+                new UpdateAttributeTask().execute();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //do nothing
+            }
+        });
+
+        spinnerRunMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Resources res = getResources();
+                String[] positions = res.getStringArray(R.array.run_mode);
+                shade.setRun_mode(positions[position]);
                 new UpdateAttributeTask().execute();
             }
 
