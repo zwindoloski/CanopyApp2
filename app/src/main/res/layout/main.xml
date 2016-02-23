@@ -41,4 +41,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_schedule"/>
+
+    <Button
+        android:id="@+id/connect_nest_account_bttn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/connect_nest_account"/>
 </LinearLayout>

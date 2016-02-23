@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.greengiant.canopy2"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions{
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -24,4 +28,5 @@ dependencies {
     compile files('libs/aws-android-sdk-ddb-mapper-2.2.11.jar')
     compile files('libs/aws-android-sdk-core-2.2.11.jar')
     compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.nestlabs:android-sdk:1.0.0'
 }
