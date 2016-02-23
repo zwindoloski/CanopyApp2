@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.nestlabs.sdk.NestAPI;
 import com.nestlabs.sdk.NestToken;
@@ -34,7 +35,7 @@ public class ConnectNestAccountActivity extends Activity {
             user.setLast_nest_access(Calendar.getInstance().getTimeInMillis());
             user.setAccess_token(token.getToken());
             new UpdateUserTask().execute();
-//            DynamoDBManager.updateUser(user);
+            Toast.makeText(getApplicationContext(), "Your Nest account has been connected to Canopy", Toast.LENGTH_LONG).show();
         }
         else
             finish();
