@@ -31,6 +31,7 @@
     <string name="bank_schedule_name_error">Schedule Name cannot be blank.</string>
     <string name="home">Home</string>
     <string name="connect_nest_account">Connect To Nest</string>
+    <string name="select_thermostat">Select Thermostat</string>
 
     <string-array name="shade_positions">
         <item>Open</item>
