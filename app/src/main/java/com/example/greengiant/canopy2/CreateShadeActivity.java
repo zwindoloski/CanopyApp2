@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +19,6 @@ import com.nestlabs.sdk.NestListener;
 import com.nestlabs.sdk.Thermostat;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 /**
  * Created by Zack on 2/14/2016. Used to create a new shade
@@ -70,7 +68,7 @@ public class CreateShadeActivity extends Activity {
                 else {
                     shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
                     shade.setName(shadeName);
-                    shade.setUser_id(10);
+                    shade.setUser_id(userId);
                     shade.setAway(true);
                     shade.setStatus("Open");
                     shade.setRun_mode(modeSpinner.getSelectedItem().toString());
@@ -101,31 +99,42 @@ public class CreateShadeActivity extends Activity {
         protected  Void doInBackground(Void... voids){
 
             rooms = DynamoDBManager.getRoomList();
-            String token = DynamoDBManager.getUser(userId).getAccess_token();
+            user = DynamoDBManager.getUser(userId);
+            String token = user.getAccess_token();
 
-            System.out.println(token);
+            if(token != null) {
+                System.out.println(token);
 
-            nest.authWithToken(token, new NestListener.AuthListener() {
-                @Override
-                public void onAuthSuccess() {
-                    // Handle success here. Start pulling from Nest API.
-                    System.out.println("success");
-                    fetchData();
-                }
+                nest.authWithToken(token, new NestListener.AuthListener() {
+                    @Override
+                    public void onAuthSuccess() {
+                        // Handle success here. Start pulling from Nest API.
+                        System.out.println("success");
+                        fetchData();
 
-                @Override
-                public void onAuthFailure(NestException e) {
-                    // Handle exceptions here.
-                    System.out.println("failure");
-                }
+                        user.setAccess_token("");
+                        new RemoveUserAccessTokenTask().execute();
+                        //toast to alert them
+                        Toast.makeText(getApplicationContext(), "Your Nest account has been disconnected. Please reconnect it from the Settings menu.", Toast.LENGTH_LONG).show();
+                    }
 
-                @Override
-                public void onAuthRevoked() {
-                    // Your previously authenticated connection has become unauthenticated.
-                    // Recommendation: Relaunch an auth flow with nest.launchAuthFlow().
-                    System.out.println("revoked");
-                }
-            });
+                    @Override
+                    public void onAuthFailure(NestException e) {
+                        // Handle exceptions here.
+                        System.out.println("failure");
+                    }
+
+                    @Override
+                    public void onAuthRevoked() {
+                        // Your previously authenticated connection has become unauthenticated.
+                        //remove access_token from user
+                        user.setAccess_token("");
+                        new RemoveUserAccessTokenTask().execute();
+                        //toast to alert them
+                        Toast.makeText(getApplicationContext(), "Your Nest account has been disconnected. Please reconnect it from the Settings menu.", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
 
             return null;
         }
@@ -157,5 +166,13 @@ public class CreateShadeActivity extends Activity {
         thermostatAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,thermostatObjects );
         thermostatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         thermostatSpinner.setAdapter(thermostatAdapter);
+    }
+
+    private class RemoveUserAccessTokenTask extends AsyncTask<Void, Void, Void>{
+
+        protected Void doInBackground(Void... voids){
+            DynamoDBManager.updateUser(user);
+            return null;
+        }
     }
 }
