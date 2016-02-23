@@ -1,44 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="bottom"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-
-    <Button
-        android:id="@+id/user_settings_bttn"
-        android:layout_width="fill_parent"
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/your_settings"/>
+        android:src="@drawable/canopy_logo_white"
+        android:adjustViewBounds="true">
 
-    <Button
-        android:id="@+id/list_shades_bttn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/list_shades"/>
+    </ImageView>
 
-    <Button
-        android:id="@+id/add_shades_bttn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_shade"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/list_rooms_bttn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/list_rooms"/>
 
-    <Button
-        android:id="@+id/add_rooms_bttn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_room"/>
+        <Button
+            android:id="@+id/user_settings_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_settings"/>
 
-    <Button
-        android:id="@+id/add_schedule_bttn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_schedule"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/list_shades_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_shades"/>
+
+        <Button
+            android:id="@+id/add_shades_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shade"/>
+
+        <Button
+            android:id="@+id/list_rooms_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_rooms"/>
+
+        <Button
+            android:id="@+id/add_rooms_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_room"/>
+
+        <Button
+            android:id="@+id/add_schedule_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_schedule"/>
+
+        <Button
+            android:id="@+id/connect_nest_account_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/connect_nest_account"/>
+    </LinearLayout>
+</RelativeLayout>

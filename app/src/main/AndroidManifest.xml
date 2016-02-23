@@ -35,6 +35,8 @@
             android:configChanges="orientation"/>
         <activity android:name="CreateHomeScheduleActivity"
             android:configChanges="orientation"/>
+        <activity android:name="ConnectNestAccountActivity"
+            android:configChanges="orientation"/>
     </application>
 
 
