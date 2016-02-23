@@ -37,8 +37,10 @@ public class ConnectNestAccountActivity extends Activity {
             new UpdateUserTask().execute();
             Toast.makeText(getApplicationContext(), "Your Nest account has been connected to Canopy", Toast.LENGTH_LONG).show();
         }
-        else
+        else {
+            Toast.makeText(getApplicationContext(), "We were unable to link your Nest account to Canopy, please try again", Toast.LENGTH_LONG).show();
             finish();
+        }
     }
 
     @Override
