@@ -51,12 +51,13 @@ public class CreateShadeScheduleActivity extends Activity {
                     t.show();
                 } else {
                     schedule = new Schedule();
+                    int dayNumber  = daySpinner.getSelectedItemPosition();
                     schedule.setDay(daySpinner.getSelectedItem().toString());
                     schedule.setStatus(shadeStatusSpinner.getSelectedItem().toString());
                     schedule.setItem_type("Shade");
                     schedule.setName(scheduleName);
                     schedule.setItem_id(shadeArrayAdapter.getItem(shadeSpinner.getSelectedItemPosition()).getId());
-                    schedule.setStart_time(String.format("%02d%02d", timePicker.getHour(), timePicker.getMinute()));
+                    schedule.setStart_time(String.format(dayNumber+"%02d%02d", timePicker.getHour(), timePicker.getMinute()));
                     new CreateScheduleTask().execute();
                 }
 

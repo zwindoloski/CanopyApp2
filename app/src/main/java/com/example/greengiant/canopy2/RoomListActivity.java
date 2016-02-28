@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class RoomListActivity extends ListActivity {
     private ArrayList<Room> items = null;
     private ArrayList<String> labels = null;
-    private int currentPosition = 0;
     private ArrayAdapter<String> arrayAdapter = null;
 
     @Override

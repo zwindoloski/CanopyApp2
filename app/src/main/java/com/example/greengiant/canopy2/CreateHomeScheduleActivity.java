@@ -46,12 +46,13 @@ public class CreateHomeScheduleActivity extends Activity {
                     t.show();
                 } else {
                     schedule = new Schedule();
+                    int dayNumber  = daySpinner.getSelectedItemPosition();
                     schedule.setDay(daySpinner.getSelectedItem().toString());
                     schedule.setStatus(shadeStatusSpinner.getSelectedItem().toString());
                     schedule.setItem_type("User");
                     schedule.setItem_id("10");
                     schedule.setName(scheduleName);
-                    schedule.setStart_time(String.format("%02d%02d", timePicker.getHour(), timePicker.getMinute()));
+                    schedule.setStart_time(dayNumber+String.format("%02d%02d", timePicker.getHour(), timePicker.getMinute()));
                     new CreateScheduleTask().execute();
                 }
 

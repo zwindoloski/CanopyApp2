@@ -56,6 +56,13 @@ public class MainActivity extends Activity{
             }
         });
 
+        final Button listScheduleButton = (Button) findViewById(R.id.list_schedule_bttn);
+        listScheduleButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick( View v){
+                new DynamoDBManagerTask().execute(DynamoDBManagerType.LIST_SCHEDULES);
+            }
+        });
+
         final Button addScheduleButton = (Button) findViewById(R.id.add_schedule_bttn);
         addScheduleButton.setOnClickListener(new View.OnClickListener(){
             public void onClick( View v){
@@ -86,6 +93,9 @@ public class MainActivity extends Activity{
             else if (types[0] == DynamoDBManagerType.LIST_ROOMS){
                 DynamoDBManager.getRoomList();
             }
+            else if (types[0] == DynamoDBManagerType.LIST_SCHEDULES){
+                DynamoDBManager.getScheduleList();
+            }
 
             return result;
         }
@@ -96,6 +106,9 @@ public class MainActivity extends Activity{
             }
             else if (result.getTaskType() == DynamoDBManagerType.LIST_ROOMS){
                 startActivity(new Intent(MainActivity.this, RoomListActivity.class));
+            }
+            else if (result.getTaskType() == DynamoDBManagerType.LIST_SCHEDULES){
+                startActivity(new Intent(MainActivity.this, ScheduleListActivity.class));
             }
             else if (result.getTaskType() == DynamoDBManagerType.USER_SETTINGS){
                 startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
@@ -115,7 +128,7 @@ public class MainActivity extends Activity{
         }
     }
     private enum DynamoDBManagerType {
-        LIST_SHADES, LIST_ROOMS, USER_SETTINGS, CREATE_ROOM, CREATE_SHADE, ADD_SCHEDULE, CONNECT_NEST_ACCOUNT
+        LIST_SHADES, LIST_ROOMS,LIST_SCHEDULES, USER_SETTINGS, CREATE_ROOM, CREATE_SHADE, ADD_SCHEDULE, CONNECT_NEST_ACCOUNT
     }
 
     private class DynamoDBManagerTaskResult {

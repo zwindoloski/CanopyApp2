@@ -19,7 +19,7 @@ public class DynamoDBManager {
 
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Shade> result = mapper.scan(
-            Shade.class, scanExpression);
+                Shade.class, scanExpression);
         ArrayList<Shade> resultList = new ArrayList<>();
         for (Shade shade : result) {
             resultList.add(shade);
@@ -87,10 +87,31 @@ public class DynamoDBManager {
         mapper.save(user);
     }
 
+    public static ArrayList<Schedule> getScheduleList(){
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Schedule> result = mapper.scan(
+                Schedule.class, scanExpression);
+        ArrayList<Schedule> resultList = new ArrayList<>();
+        for (Schedule schedule : result) {
+            resultList.add(schedule);
+        }
+        return resultList;
+    }
     public static void updateSchedule(Schedule schedule){
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
         mapper.save(schedule);
+    }
+
+    public static Schedule getSchedule(String id){
+
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        return mapper.load(Schedule.class, id);
     }
 }

@@ -32,6 +32,8 @@
     <string name="home">Home</string>
     <string name="connect_nest_account">Connect To Nest</string>
     <string name="select_thermostat">Select Thermostat</string>
+    <string name="view_schedules">View All Schedules</string>
+    <string name="update">Update</string>
 
     <string-array name="shade_positions">
         <item>Open</item>
