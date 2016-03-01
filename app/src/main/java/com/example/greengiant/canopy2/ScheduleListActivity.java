@@ -12,41 +12,42 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 /**
- * Created by Zack on 2/6/2016.
+ * Created by Zack on 2/28/2016.
  */
-public class RoomListActivity extends ListActivity {
-    private ArrayList<Room> items = null;
+public class ScheduleListActivity extends ListActivity {
+    private ArrayList<Schedule> items = null;
     private ArrayList<String> labels = null;
+    private int currentPosition = 0;
     private ArrayAdapter<String> arrayAdapter = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new GetRoomListTask().execute();
+        new GetScheduleListTask().execute();
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
-        Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
-        intent.putExtra("ROOM_ID", items.get(position).getId() + "");
+        Intent intent = new Intent(ScheduleListActivity.this, ScheduleActivity.class);
+        intent.putExtra("SCHEDULE_ID", items.get(position).getId() + "");
         startActivity(intent);
     }
 
-    private class GetRoomListTask extends AsyncTask<Void,Void, Void>{
+    private class GetScheduleListTask extends AsyncTask<Void,Void, Void> {
 
         protected Void doInBackground(Void... inputs) {
             labels = new ArrayList<>();
-            items = DynamoDBManager.getRoomList();
+            items = DynamoDBManager.getScheduleList();
 
-            for (Room room : items) {
-                labels.add(room.getName());
+            for (Schedule schedule : items) {
+                labels.add(schedule.getName());
             }
             return null;
         }
 
         protected void onPostExecute(Void result){
-            arrayAdapter = new ArrayAdapter<>(RoomListActivity.this,
-                    R.layout.room_list_item, labels);
+            arrayAdapter = new ArrayAdapter<>(ScheduleListActivity.this,
+                    R.layout.schedule_list_item, labels);
             setListAdapter(arrayAdapter);
         }
     }

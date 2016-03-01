@@ -5,99 +5,69 @@
     android:layout_height="fill_parent">
 
     <TextView
+        android:id="@+id/textViewScheduleName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_new_shade"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="center"
-        android:padding="10dp"/>
-
-
-    <LinearLayout
-        android:id="@+id/create_shade_linear1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/create_shade_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/shade_name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.6"/>
-
-        <EditText
-            android:id="@+id/create_shade_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/new_shade_hint"/>
-
-    </LinearLayout>
+        android:gravity="center"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/ShadeModeCreate"
+            android:id="@+id/textViewDayOfWeek"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="@string/run_mode"
+            android:text="@string/day_of_week"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_weight="0.7"/>
 
         <Spinner
-            android:id="@+id/spinnerShadeModeCreate"
+            android:id="@+id/spinnerDayOfWeek"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:entries="@array/run_mode"/>
+            android:entries="@array/days_of_week"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/room_for_shade_linear_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/room_for_shade_text_view"
+            android:id="@+id/TextViewSheduleStatus"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="@string/select_room"
+            android:text="@string/shade_position"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_weight="0.7"/>
 
         <Spinner
-            android:id="@+id/spinner_rooms"
+            android:id="@+id/spinnerScheduleStatus"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:entries="@array/shade_positions"/>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/thermostat_for_shade_linear_layout"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/thermostat_for_shade_text_view"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="@string/select_thermostat"
+            android:text="@string/start_time"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_weight="0.7"/>
-
-        <Spinner
-            android:id="@+id/spinner_thermostats"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+        <TimePicker
+            android:id="@+id/schedule_update_time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -105,10 +75,12 @@
 
 
         <Button
-            android:id="@+id/new_shade_create_bttn"
+            android:id="@+id/update_schedule_bttn"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:text="@string/create"/>
+            android:text="@string/update"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     </LinearLayout>
+
 </LinearLayout>

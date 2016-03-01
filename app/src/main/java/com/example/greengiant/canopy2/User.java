@@ -10,9 +10,9 @@ public class User {
     private int id;
     private String username;
     private String access_token;
-    private String nest_pin;
     private int schedule_id;
     private int behavior_id;
+    private long last_nest_access;
 
     @DynamoDBHashKey(attributeName = "id")
     public int getId(){
@@ -41,13 +41,13 @@ public class User {
         this.access_token = access_token;
     }
 
-    @DynamoDBAttribute(attributeName = "nest_pin")
-    public String getNest_pin() {
-        return nest_pin;
+    @DynamoDBAttribute(attributeName = "last_nest_access")
+    public long getLast_nest_access() {
+        return last_nest_access;
     }
 
-    public void setNest_pin(String nest_pin) {
-        this.nest_pin = nest_pin;
+    public void setLast_nest_access(long last_nest_access) {
+        this.last_nest_access = last_nest_access;
     }
 
     @DynamoDBAttribute(attributeName = "schedule_id")
