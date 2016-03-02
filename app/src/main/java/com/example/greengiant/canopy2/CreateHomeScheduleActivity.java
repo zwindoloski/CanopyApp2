@@ -32,7 +32,7 @@ public class CreateHomeScheduleActivity extends Activity {
     public void setupActivity() {
 
         final EditText scheduleNameET = (EditText) findViewById(R.id.schedule_name_edit_text);
-        final Spinner shadeStatusSpinner = (Spinner) findViewById(R.id.spinner_shade_position);
+        final Spinner shadeModeSpinner = (Spinner) findViewById(R.id.spinnerUserScheduleMode);
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day_of_week);
         final Button createRoomScheduleButton = (Button) findViewById(R.id.create_home_schedule_bttn);
         final TimePicker timePicker = (TimePicker) findViewById(R.id.schedule_time_picker);
@@ -48,7 +48,7 @@ public class CreateHomeScheduleActivity extends Activity {
                     schedule = new Schedule();
                     int dayNumber  = daySpinner.getSelectedItemPosition();
                     schedule.setDay(daySpinner.getSelectedItem().toString());
-                    schedule.setStatus(shadeStatusSpinner.getSelectedItem().toString());
+                    schedule.setRun_mode(shadeModeSpinner.getSelectedItem().toString());
                     schedule.setItem_type("User");
                     schedule.setItem_id("10");
                     schedule.setName(scheduleName);
