@@ -55,7 +55,7 @@ public class ShadeActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Resources res = getResources();
-                String[] positions = res.getStringArray(R.array.run_mode);
+                String[] positions = res.getStringArray(R.array.shade_run_mode);
                 shade.setRun_mode(positions[position]);
                 new UpdateAttributeTask().execute();
             }

@@ -38,19 +38,19 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/TextViewSheduleStatus"
+            android:id="@+id/scheduleModeTextView"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:text="@string/shade_position"
+            android:text="@string/run_mode"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_weight="0.7"/>
 
         <Spinner
-            android:id="@+id/spinnerScheduleStatus"
+            android:id="@+id/spinnerScheduleMode"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:entries="@array/shade_positions"/>
+            android:entries="@array/shade_run_mode"/>
 
     </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

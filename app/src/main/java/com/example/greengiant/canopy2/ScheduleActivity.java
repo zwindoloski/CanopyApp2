@@ -52,13 +52,13 @@ public class ScheduleActivity extends Activity {
             }
         }
 
-        final Spinner spinnerScheduleStatus = (Spinner) findViewById(R.id.spinnerScheduleStatus);
-        if (schedule.getStatus() != null) {
+        final Spinner spinnerScheduleMode = (Spinner) findViewById(R.id.spinnerScheduleMode);
+        if (schedule.getRun_mode() != null) {
             Resources res = getResources();
-            String[] positions = res.getStringArray(R.array.shade_positions);
+            String[] positions = res.getStringArray(R.array.shade_run_mode);
             for (int i = 0; i < positions.length; i++) {
-                if (positions[i].equalsIgnoreCase(schedule.getStatus())) {
-                    spinnerScheduleStatus.setSelection(i, true);
+                if (positions[i].equalsIgnoreCase(schedule.getRun_mode())) {
+                    spinnerScheduleMode.setSelection(i, true);
                     break;
                 }
             }
@@ -76,7 +76,7 @@ public class ScheduleActivity extends Activity {
         updateScheduleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 schedule.setDay(spinnerDayPosition.getSelectedItem().toString());
-                schedule.setStatus(spinnerScheduleStatus.getSelectedItem().toString());
+                schedule.setRun_mode(spinnerScheduleMode.getSelectedItem().toString());
                 int dayNum = spinnerDayPosition.getSelectedItemPosition();
                 schedule.setStart_time(String.format(dayNum + "%02d%02d", scheduleTimePicker.getHour(), scheduleTimePicker.getMinute()));
                 new UpdateAttributeTask().execute();

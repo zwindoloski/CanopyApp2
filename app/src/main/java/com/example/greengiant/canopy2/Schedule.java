@@ -13,7 +13,7 @@ public class Schedule {
     String item_id;
     String day;
     String start_time;
-    String status;
+    String run_mode;
     String name;
 
     @DynamoDBHashKey(attributeName = "id")
@@ -62,13 +62,13 @@ public class Schedule {
         this.start_time = start_time;
     }
 
-    @DynamoDBAttribute(attributeName = "status")
-    public String getStatus() {
-        return status;
+    @DynamoDBAttribute(attributeName = "run_mode")
+    public String getRun_mode() {
+        return run_mode;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRun_mode(String run_mode) {
+        this.run_mode = run_mode;
     }
 
     @DynamoDBAttribute(attributeName = "name")
