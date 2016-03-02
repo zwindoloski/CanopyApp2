@@ -67,8 +67,8 @@ public class ScheduleActivity extends Activity {
         final TimePicker scheduleTimePicker = (TimePicker) findViewById(R.id.schedule_update_time_picker);
         int minutes = schedule.getStart_time()%100;
         int hours = (schedule.getStart_time()/100)%100;
-        scheduleTimePicker.setMinute(minutes);
-        scheduleTimePicker.setHour(hours);
+        AppUtils.setMinute(scheduleTimePicker, minutes);
+        AppUtils.setHour(scheduleTimePicker, hours);
 
         final Button updateScheduleButton = (Button) findViewById(R.id.update_schedule_bttn);
         updateScheduleButton.setOnClickListener(new View.OnClickListener() {
