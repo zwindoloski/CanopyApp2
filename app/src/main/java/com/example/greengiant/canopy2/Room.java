@@ -8,7 +8,7 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 public class Room {
     private String id;
     private String name;
-    private int user_id;
+    private String user_id;
     private String run_mode;
 
     @DynamoDBHashKey(attributeName = "id")
@@ -31,11 +31,11 @@ public class Room {
     }
 
     @DynamoDBAttribute(attributeName = "user_id")
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 

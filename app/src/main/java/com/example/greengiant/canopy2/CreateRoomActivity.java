@@ -32,7 +32,7 @@ public class CreateRoomActivity extends Activity {
                 }
                 else {
                     room.setName(roomName);
-                    room.setUser_id(10);
+                    room.setUser_id(Constants.USER_ID);
                     new CreateRoomTask().execute();
                 }
             }

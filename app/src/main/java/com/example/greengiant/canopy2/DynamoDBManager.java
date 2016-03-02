@@ -73,7 +73,7 @@ public class DynamoDBManager {
         mapper.save(room);
     }
 
-    public static User getUser(int id){
+    public static User getUser(String id){
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 

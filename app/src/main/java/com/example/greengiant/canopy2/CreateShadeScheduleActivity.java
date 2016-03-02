@@ -50,14 +50,16 @@ public class CreateShadeScheduleActivity extends Activity {
                     Toast t = Toast.makeText(CreateShadeScheduleActivity.this, R.string.bank_schedule_name_error, Toast.LENGTH_LONG);
                     t.show();
                 } else {
-                    schedule = new Schedule();
                     int dayNumber  = daySpinner.getSelectedItemPosition();
+                    int time = dayNumber*10000 + AppUtils.getHour(timePicker)*100 + AppUtils.getMinute(timePicker);
+
+                    schedule = new Schedule();
                     schedule.setDay(daySpinner.getSelectedItem().toString());
                     schedule.setRun_mode(shadeModeSpinner.getSelectedItem().toString());
                     schedule.setItem_type("Shade");
                     schedule.setName(scheduleName);
                     schedule.setItem_id(shadeArrayAdapter.getItem(shadeSpinner.getSelectedItemPosition()).getId());
-                    schedule.setStart_time(String.format(dayNumber+"%02d%02d", timePicker.getHour(), timePicker.getMinute()));
+                    schedule.setStart_time(time);
                     new CreateScheduleTask().execute();
                 }
 
