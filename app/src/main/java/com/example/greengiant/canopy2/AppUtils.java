@@ -37,7 +37,7 @@ public final class AppUtils {
         else
             timePicker.setCurrentMinute(minute);
     }
-    
+
     @SuppressLint("NewApi")
     public static void setHour(TimePicker timePicker, int hour) {
         int currentApiVersion = android.os.Build.VERSION.SDK_INT;
