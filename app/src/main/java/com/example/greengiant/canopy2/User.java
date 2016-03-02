@@ -12,7 +12,6 @@ public class User {
     private String access_token;
     private int schedule_id;
     private int behavior_id;
-    private long last_nest_access;
 
     @DynamoDBHashKey(attributeName = "id")
     public int getId(){
@@ -39,15 +38,6 @@ public class User {
 
     public void setAccess_token(String access_token) {
         this.access_token = access_token;
-    }
-
-    @DynamoDBAttribute(attributeName = "last_nest_access")
-    public long getLast_nest_access() {
-        return last_nest_access;
-    }
-
-    public void setLast_nest_access(long last_nest_access) {
-        this.last_nest_access = last_nest_access;
     }
 
     @DynamoDBAttribute(attributeName = "schedule_id")

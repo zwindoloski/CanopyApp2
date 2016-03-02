@@ -32,7 +32,6 @@ public class ConnectNestAccountActivity extends Activity {
             System.out.println(token);
             System.out.println(token.getToken());
 
-            user.setLast_nest_access(Calendar.getInstance().getTimeInMillis());
             user.setAccess_token(token.getToken());
             new UpdateUserTask().execute();
             Toast.makeText(getApplicationContext(), "Your Nest account has been connected to Canopy", Toast.LENGTH_LONG).show();
