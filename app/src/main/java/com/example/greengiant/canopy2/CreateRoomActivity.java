@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
@@ -23,6 +24,9 @@ public class CreateRoomActivity extends Activity {
 
         final EditText roomNameET = (EditText) findViewById(R.id.createRoomEditText);
         final Button createRoomButton = (Button) findViewById(R.id.newRoomCreateBttn);
+
+        final Spinner modeSpinner = (Spinner) findViewById(R.id.spinnerRoomModeCreate);
+
         createRoomButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String roomName = roomNameET.getText().toString();
@@ -33,6 +37,7 @@ public class CreateRoomActivity extends Activity {
                 else {
                     room.setName(roomName);
                     room.setUser_id(Constants.USER_ID);
+                    room.setRun_mode(modeSpinner.getSelectedItem().toString());
                     new CreateRoomTask().execute();
                 }
             }
