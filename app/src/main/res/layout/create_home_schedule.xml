@@ -50,7 +50,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:entries="@array/user_run_mode"/>
+            android:entries="@array/schedule_run_mode"/>
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

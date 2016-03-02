@@ -70,6 +70,13 @@
         <item>@string/closed_mode</item>
     </string-array>
 
+    <string-array name="schedule_run_mode">
+        <item>@string/manual_mode</item>
+        <item>@string/energy_mode</item>
+        <item>@string/open_mode</item>
+        <item>@string/closed_mode</item>
+    </string-array>
+
     <string-array name="days_of_week">
         <item>Sunday</item>
         <item>Monday</item>
