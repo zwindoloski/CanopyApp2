@@ -111,17 +111,17 @@ public class CreateShadeActivity extends Activity {
                         // Handle success here. Start pulling from Nest API.
                         System.out.println("success");
                         fetchData();
-
-                        user.setAccess_token("");
-                        new RemoveUserAccessTokenTask().execute();
-                        //toast to alert them
-                        Toast.makeText(getApplicationContext(), "Your Nest account has been disconnected. Please reconnect it from the Settings menu.", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onAuthFailure(NestException e) {
                         // Handle exceptions here.
                         System.out.println("failure");
+
+                        user.setAccess_token("");
+                        new RemoveUserAccessTokenTask().execute();
+                        //toast to alert them
+                        Toast.makeText(getApplicationContext(), "Your Nest account has been disconnected. Please reconnect it from the Settings menu.", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
