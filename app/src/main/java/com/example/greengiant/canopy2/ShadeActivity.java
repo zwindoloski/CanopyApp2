@@ -51,12 +51,13 @@ public class ShadeActivity extends Activity {
         }
 
         final Spinner spinnerRunMode = (Spinner) findViewById(R.id.spinnerShadeMode);
+        System.out.println(shade.getRun_mode());
         if (shade.getRun_mode() != null) {
             Resources res = getResources();
             String[] positions = res.getStringArray(R.array.run_mode);
             for (int i=0; i<positions.length;i++){
-                if (positions[i].equalsIgnoreCase(shade.getStatus())){
-                    spinnerShadePosition.setSelection(i,true);
+                if (positions[i].equalsIgnoreCase(shade.getRun_mode())){
+                    spinnerRunMode.setSelection(i,true);
                 }
             }
         }

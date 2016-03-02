@@ -46,6 +46,8 @@
         <item>Manual</item>
         <item>Energy Saving</item>
         <item>Schedule</item>
+        <item>Open</item>
+        <item>Closed</item>
     </string-array>
 
     <string-array name="days_of_week">
