@@ -42,7 +42,26 @@
         <item>Half Closed Down</item>
     </string-array>
 
-    <string-array name="run_mode">
+    <string-array name="shade_run_mode">
+        <item>Manual</item>
+        <item>Energy Saving</item>
+        <item>Schedule</item>
+        <item>Open</item>
+        <item>Closed</item>
+        <item>User</item>
+        <item>Room</item>
+    </string-array>
+
+    <string-array name="room_run_mode">
+        <item>Manual</item>
+        <item>Energy Saving</item>
+        <item>Schedule</item>
+        <item>Open</item>
+        <item>Closed</item>
+        <item>User</item>
+    </string-array>
+
+    <string-array name="user_run_mode">
         <item>Manual</item>
         <item>Energy Saving</item>
         <item>Schedule</item>

@@ -54,7 +54,7 @@ public class ShadeActivity extends Activity {
         System.out.println(shade.getRun_mode());
         if (shade.getRun_mode() != null) {
             Resources res = getResources();
-            String[] positions = res.getStringArray(R.array.run_mode);
+            String[] positions = res.getStringArray(R.array.shade_run_mode);
             for (int i=0; i<positions.length;i++){
                 if (positions[i].equalsIgnoreCase(shade.getRun_mode())){
                     spinnerRunMode.setSelection(i,true);

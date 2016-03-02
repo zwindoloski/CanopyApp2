@@ -10,8 +10,7 @@ public class User {
     private int id;
     private String username;
     private String access_token;
-    private int schedule_id;
-    private int behavior_id;
+    private String run_mode;
 
     @DynamoDBHashKey(attributeName = "id")
     public int getId(){
@@ -40,22 +39,13 @@ public class User {
         this.access_token = access_token;
     }
 
-    @DynamoDBAttribute(attributeName = "schedule_id")
-    public int getSchedule_id() {
-        return schedule_id;
+    @DynamoDBAttribute(attributeName = "run_mode")
+    public String getRun_mode() {
+        return run_mode;
     }
 
-    public void setSchedule_id(int schedule_id) {
-        this.schedule_id = schedule_id;
-    }
-
-    @DynamoDBAttribute(attributeName = "behavior_id")
-    public int getBehavior_id() {
-        return behavior_id;
-    }
-
-    public void setBehavior_id(int behavior_id) {
-        this.behavior_id = behavior_id;
+    public void setRun_mode(String run_mode) {
+        this.run_mode = run_mode;
     }
 
 }
