@@ -62,7 +62,7 @@ public class UserSettingsActivity extends Activity {
     private class GetUserSettingsTask extends AsyncTask<Void, Void, Void> {
 
         protected Void doInBackground(Void... voids){
-            user = DynamoDBManager.getUser(10);
+            user = DynamoDBManager.getUser(Constants.USER_ID);
             return null;
         }
 

@@ -65,20 +65,19 @@ public class ScheduleActivity extends Activity {
         }
 
         final TimePicker scheduleTimePicker = (TimePicker) findViewById(R.id.schedule_update_time_picker);
-        if (schedule.getStart_time() != null) {
-            int minutes = Integer.parseInt(schedule.getStart_time().substring(3));
-            int hours = Integer.parseInt(schedule.getStart_time().substring(1, 3));
-            scheduleTimePicker.setMinute(minutes);
-            scheduleTimePicker.setHour(hours);
-        }
+        int minutes = schedule.getStart_time()%100;
+        int hours = (schedule.getStart_time()/100)%100;
+        scheduleTimePicker.setMinute(minutes);
+        scheduleTimePicker.setHour(hours);
 
         final Button updateScheduleButton = (Button) findViewById(R.id.update_schedule_bttn);
         updateScheduleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 schedule.setDay(spinnerDayPosition.getSelectedItem().toString());
                 schedule.setRun_mode(spinnerScheduleMode.getSelectedItem().toString());
-                int dayNum = spinnerDayPosition.getSelectedItemPosition();
-                schedule.setStart_time(String.format(dayNum + "%02d%02d", scheduleTimePicker.getHour(), scheduleTimePicker.getMinute()));
+                int dayNumber = spinnerDayPosition.getSelectedItemPosition();
+                int time = dayNumber*10000 + AppUtils.getHour(scheduleTimePicker)*100 + AppUtils.getMinute(scheduleTimePicker);
+                schedule.setStart_time(time);
                 new UpdateAttributeTask().execute();
             }
         });
