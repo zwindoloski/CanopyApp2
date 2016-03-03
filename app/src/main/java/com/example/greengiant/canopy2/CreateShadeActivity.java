@@ -32,7 +32,6 @@ public class CreateShadeActivity extends Activity {
     ArrayList<Thermostat> thermostats = null;
 
     User user = null;
-    int userId = 10;
     NestAPI nest;
 
     @Override
@@ -68,7 +67,7 @@ public class CreateShadeActivity extends Activity {
                 else {
                     shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
                     shade.setName(shadeName);
-                    shade.setUser_id(userId);
+                    shade.setUser_id(Constants.USER_ID);
                     shade.setAway(true);
                     shade.setStatus("Open");
                     shade.setRun_mode(modeSpinner.getSelectedItem().toString());
@@ -99,7 +98,7 @@ public class CreateShadeActivity extends Activity {
         protected  Void doInBackground(Void... voids){
 
             rooms = DynamoDBManager.getRoomList();
-            user = DynamoDBManager.getUser(userId);
+            user = DynamoDBManager.getUser(Constants.USER_ID);
             String token = user.getAccess_token();
 
             if(token != null) {
@@ -111,17 +110,17 @@ public class CreateShadeActivity extends Activity {
                         // Handle success here. Start pulling from Nest API.
                         System.out.println("success");
                         fetchData();
-
-                        user.setAccess_token("");
-                        new RemoveUserAccessTokenTask().execute();
-                        //toast to alert them
-                        Toast.makeText(getApplicationContext(), "Your Nest account has been disconnected. Please reconnect it from the Settings menu.", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onAuthFailure(NestException e) {
                         // Handle exceptions here.
                         System.out.println("failure");
+
+                        user.setAccess_token("");
+                        new RemoveUserAccessTokenTask().execute();
+                        //toast to alert them
+                        Toast.makeText(getApplicationContext(), "Your Nest account has been disconnected. Please reconnect it from the Settings menu.", Toast.LENGTH_LONG).show();
                     }
 
                     @Override

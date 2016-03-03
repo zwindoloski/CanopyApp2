@@ -19,7 +19,6 @@ public class ConnectNestAccountActivity extends Activity {
     // A request code you can verify later.
     int AUTH_TOKEN_REQUEST_CODE = 123;
 
-    private int userId = 10;
     private User user = null;
 
     // On your Activity, override the following method to receive the token:
@@ -32,7 +31,6 @@ public class ConnectNestAccountActivity extends Activity {
             System.out.println(token);
             System.out.println(token.getToken());
 
-            user.setLast_nest_access(Calendar.getInstance().getTimeInMillis());
             user.setAccess_token(token.getToken());
             new UpdateUserTask().execute();
             Toast.makeText(getApplicationContext(), "Your Nest account has been connected to Canopy", Toast.LENGTH_LONG).show();
@@ -53,14 +51,13 @@ public class ConnectNestAccountActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connect_nest_account);
 
-//        userId = getIntent().getExtras().getString("USER_ID");
         new GetUserTask().execute();
     }
 
     private class GetUserTask extends AsyncTask<Void, Void, Void> {
 
         protected Void doInBackground(Void... voids){
-            user = DynamoDBManager.getUser(userId);
+            user = DynamoDBManager.getUser(Constants.USER_ID);
             return null;
         }
     }

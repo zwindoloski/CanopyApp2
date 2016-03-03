@@ -16,7 +16,7 @@ public class Shade {
     private int desired_temp;
     private String last_nest_update;
     private String thermostat_id;
-    private int user_id;
+    private String user_id;
     private String room_id;
 
     @DynamoDBHashKey(attributeName = "id")
@@ -102,11 +102,11 @@ public class Shade {
     }
 
     @DynamoDBAttribute(attributeName = "user_id")
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 

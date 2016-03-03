@@ -52,33 +52,32 @@ public class ScheduleActivity extends Activity {
             }
         }
 
-        final Spinner spinnerScheduleStatus = (Spinner) findViewById(R.id.spinnerScheduleStatus);
-        if (schedule.getStatus() != null) {
+        final Spinner spinnerScheduleMode = (Spinner) findViewById(R.id.spinnerScheduleMode);
+        if (schedule.getRun_mode() != null) {
             Resources res = getResources();
-            String[] positions = res.getStringArray(R.array.shade_positions);
+            String[] positions = res.getStringArray(R.array.shade_run_mode);
             for (int i = 0; i < positions.length; i++) {
-                if (positions[i].equalsIgnoreCase(schedule.getStatus())) {
-                    spinnerScheduleStatus.setSelection(i, true);
+                if (positions[i].equalsIgnoreCase(schedule.getRun_mode())) {
+                    spinnerScheduleMode.setSelection(i, true);
                     break;
                 }
             }
         }
 
         final TimePicker scheduleTimePicker = (TimePicker) findViewById(R.id.schedule_update_time_picker);
-        if (schedule.getStart_time() != null) {
-            int minutes = Integer.parseInt(schedule.getStart_time().substring(3));
-            int hours = Integer.parseInt(schedule.getStart_time().substring(1, 3));
-            scheduleTimePicker.setMinute(minutes);
-            scheduleTimePicker.setHour(hours);
-        }
+        int minutes = schedule.getStart_time()%100;
+        int hours = (schedule.getStart_time()/100)%100;
+        AppUtils.setMinute(scheduleTimePicker, minutes);
+        AppUtils.setHour(scheduleTimePicker, hours);
 
         final Button updateScheduleButton = (Button) findViewById(R.id.update_schedule_bttn);
         updateScheduleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 schedule.setDay(spinnerDayPosition.getSelectedItem().toString());
-                schedule.setStatus(spinnerScheduleStatus.getSelectedItem().toString());
-                int dayNum = spinnerDayPosition.getSelectedItemPosition();
-                schedule.setStart_time(String.format(dayNum + "%02d%02d", scheduleTimePicker.getHour(), scheduleTimePicker.getMinute()));
+                schedule.setRun_mode(spinnerScheduleMode.getSelectedItem().toString());
+                int dayNumber = spinnerDayPosition.getSelectedItemPosition();
+                int time = dayNumber*10000 + AppUtils.getHour(scheduleTimePicker)*100 + AppUtils.getMinute(scheduleTimePicker);
+                schedule.setStart_time(time);
                 new UpdateAttributeTask().execute();
             }
         });

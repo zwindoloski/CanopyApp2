@@ -7,19 +7,17 @@ package com.example.greengiant.canopy2;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 @DynamoDBTable(tableName = "Users")
 public class User {
-    private int id;
+    private String id;
     private String username;
     private String access_token;
-    private int schedule_id;
-    private int behavior_id;
-    private long last_nest_access;
+    private String run_mode;
 
     @DynamoDBHashKey(attributeName = "id")
-    public int getId(){
+    public String getId(){
         return id;
     }
 
-    public void setId(int id){
+    public void setId(String id){
         this.id = id;
     }
 
@@ -41,31 +39,13 @@ public class User {
         this.access_token = access_token;
     }
 
-    @DynamoDBAttribute(attributeName = "last_nest_access")
-    public long getLast_nest_access() {
-        return last_nest_access;
+    @DynamoDBAttribute(attributeName = "run_mode")
+    public String getRun_mode() {
+        return run_mode;
     }
 
-    public void setLast_nest_access(long last_nest_access) {
-        this.last_nest_access = last_nest_access;
-    }
-
-    @DynamoDBAttribute(attributeName = "schedule_id")
-    public int getSchedule_id() {
-        return schedule_id;
-    }
-
-    public void setSchedule_id(int schedule_id) {
-        this.schedule_id = schedule_id;
-    }
-
-    @DynamoDBAttribute(attributeName = "behavior_id")
-    public int getBehavior_id() {
-        return behavior_id;
-    }
-
-    public void setBehavior_id(int behavior_id) {
-        this.behavior_id = behavior_id;
+    public void setRun_mode(String run_mode) {
+        this.run_mode = run_mode;
     }
 
 }
