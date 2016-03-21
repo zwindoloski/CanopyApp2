@@ -32,7 +32,7 @@ public class CreateHomeScheduleActivity extends Activity {
     public void setupActivity() {
 
         final EditText scheduleNameET = (EditText) findViewById(R.id.schedule_name_edit_text);
-        final Spinner shadeStatusSpinner = (Spinner) findViewById(R.id.spinner_shade_position);
+        final Spinner shadeModeSpinner = (Spinner) findViewById(R.id.spinnerUserScheduleMode);
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day_of_week);
         final Button createRoomScheduleButton = (Button) findViewById(R.id.create_home_schedule_bttn);
         final TimePicker timePicker = (TimePicker) findViewById(R.id.schedule_time_picker);
@@ -45,14 +45,16 @@ public class CreateHomeScheduleActivity extends Activity {
                     Toast t = Toast.makeText(CreateHomeScheduleActivity.this, R.string.bank_schedule_name_error, Toast.LENGTH_LONG);
                     t.show();
                 } else {
-                    schedule = new Schedule();
                     int dayNumber  = daySpinner.getSelectedItemPosition();
+                    int time = dayNumber*10000 + AppUtils.getHour(timePicker)*100 + AppUtils.getMinute(timePicker);
+
+                    schedule = new Schedule();
                     schedule.setDay(daySpinner.getSelectedItem().toString());
-                    schedule.setStatus(shadeStatusSpinner.getSelectedItem().toString());
+                    schedule.setRun_mode(shadeModeSpinner.getSelectedItem().toString());
                     schedule.setItem_type("User");
-                    schedule.setItem_id("10");
                     schedule.setName(scheduleName);
-                    schedule.setStart_time(dayNumber+String.format("%02d%02d", timePicker.getHour(), timePicker.getMinute()));
+                    schedule.setItem_id(Constants.USER_ID);
+                    schedule.setStart_time(time);
                     new CreateScheduleTask().execute();
                 }
 

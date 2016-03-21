@@ -30,9 +30,7 @@ public class UserSettingsActivity extends Activity {
         final TextView textViewUsername = (TextView) findViewById(R.id.textViewUserName);
         textViewUsername.setText(userName);
 
-
         final Spinner spinnerRunMode = (Spinner) findViewById(R.id.spinnerUserMode);
-        System.out.println(user.getRun_mode());
         if (user.getRun_mode() != null) {
             Resources res = getResources();
             String[] positions = res.getStringArray(R.array.user_run_mode);
@@ -62,7 +60,7 @@ public class UserSettingsActivity extends Activity {
     private class GetUserSettingsTask extends AsyncTask<Void, Void, Void> {
 
         protected Void doInBackground(Void... voids){
-            user = DynamoDBManager.getUser(10);
+            user = DynamoDBManager.getUser(Constants.USER_ID);
             return null;
         }
 

@@ -37,7 +37,7 @@ public class CreateShadeScheduleActivity extends Activity {
         shadeSpinner.setAdapter(shadeArrayAdapter);
 
         final EditText scheduleNameET = (EditText) findViewById(R.id.schedule_name_edit_text);
-        final Spinner shadeStatusSpinner = (Spinner) findViewById(R.id.spinner_shade_position);
+        final Spinner shadeModeSpinner = (Spinner) findViewById(R.id.spinnerShadeScheduleMode);
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day_of_week);
         final Button createShadeScheduleButton = (Button) findViewById(R.id.create_shade_schedule_bttn);
         final TimePicker timePicker = (TimePicker) findViewById(R.id.schedule_time_picker);
@@ -50,14 +50,16 @@ public class CreateShadeScheduleActivity extends Activity {
                     Toast t = Toast.makeText(CreateShadeScheduleActivity.this, R.string.bank_schedule_name_error, Toast.LENGTH_LONG);
                     t.show();
                 } else {
-                    schedule = new Schedule();
                     int dayNumber  = daySpinner.getSelectedItemPosition();
+                    int time = dayNumber*10000 + AppUtils.getHour(timePicker)*100 + AppUtils.getMinute(timePicker);
+
+                    schedule = new Schedule();
                     schedule.setDay(daySpinner.getSelectedItem().toString());
-                    schedule.setStatus(shadeStatusSpinner.getSelectedItem().toString());
+                    schedule.setRun_mode(shadeModeSpinner.getSelectedItem().toString());
                     schedule.setItem_type("Shade");
                     schedule.setName(scheduleName);
                     schedule.setItem_id(shadeArrayAdapter.getItem(shadeSpinner.getSelectedItemPosition()).getId());
-                    schedule.setStart_time(String.format(dayNumber+"%02d%02d", timePicker.getHour(), timePicker.getMinute()));
+                    schedule.setStart_time(time);
                     new CreateScheduleTask().execute();
                 }
 

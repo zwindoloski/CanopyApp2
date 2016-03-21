@@ -35,38 +35,46 @@
     <string name="view_schedules">View All Schedules</string>
     <string name="update">Update</string>
 
-    <string-array name="shade_positions">
-        <item>Open</item>
-        <item>Closed</item>
-        <item>Half Closed Up</item>
-        <item>Half Closed Down</item>
-    </string-array>
+    <string name="manual_mode">Manual</string>
+    <string name="energy_mode">Energy Saving</string>
+    <string name="schedule_mode">Schedule</string>
+    <string name="open_mode">Open</string>
+    <string name="closed_mode">Closed</string>
+    <string name="user_mode">User</string>
+    <string name="room_mode">Room</string>
 
     <string-array name="shade_run_mode">
-        <item>Manual</item>
-        <item>Energy Saving</item>
-        <item>Schedule</item>
-        <item>Open</item>
-        <item>Closed</item>
-        <item>User</item>
-        <item>Room</item>
+        <item>@string/manual_mode</item>
+        <item>@string/energy_mode</item>
+        <item>@string/schedule_mode</item>
+        <item>@string/open_mode</item>
+        <item>@string/closed_mode</item>
+        <item>@string/user_mode</item>
+        <item>@string/room_mode</item>
     </string-array>
 
     <string-array name="room_run_mode">
-        <item>Manual</item>
-        <item>Energy Saving</item>
-        <item>Schedule</item>
-        <item>Open</item>
-        <item>Closed</item>
-        <item>User</item>
+        <item>@string/manual_mode</item>
+        <item>@string/energy_mode</item>
+        <item>@string/schedule_mode</item>
+        <item>@string/open_mode</item>
+        <item>@string/closed_mode</item>
+        <item>@string/user_mode</item>
     </string-array>
 
     <string-array name="user_run_mode">
-        <item>Manual</item>
-        <item>Energy Saving</item>
-        <item>Schedule</item>
-        <item>Open</item>
-        <item>Closed</item>
+        <item>@string/manual_mode</item>
+        <item>@string/energy_mode</item>
+        <item>@string/schedule_mode</item>
+        <item>@string/open_mode</item>
+        <item>@string/closed_mode</item>
+    </string-array>
+
+    <string-array name="schedule_run_mode">
+        <item>@string/manual_mode</item>
+        <item>@string/energy_mode</item>
+        <item>@string/open_mode</item>
+        <item>@string/closed_mode</item>
     </string-array>
 
     <string-array name="days_of_week">

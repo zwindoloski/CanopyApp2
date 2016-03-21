@@ -40,7 +40,6 @@ public class ShadeActivity extends Activity {
         textViewVoltage.setText(String.valueOf(voltage));
 
         final Spinner spinnerRunMode = (Spinner) findViewById(R.id.spinnerShadeMode);
-        System.out.println(shade.getRun_mode());
         if (shade.getRun_mode() != null) {
             Resources res = getResources();
             String[] positions = res.getStringArray(R.array.shade_run_mode);

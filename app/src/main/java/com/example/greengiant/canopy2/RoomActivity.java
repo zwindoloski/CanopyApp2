@@ -33,7 +33,6 @@ public class RoomActivity extends Activity {
         textViewRoomName.setText(roomName);
 
         final Spinner spinnerRunMode = (Spinner) findViewById(R.id.spinnerRoomMode);
-        System.out.println(room.getRun_mode());
         if (room.getRun_mode() != null) {
             Resources res = getResources();
             String[] positions = res.getStringArray(R.array.room_run_mode);
