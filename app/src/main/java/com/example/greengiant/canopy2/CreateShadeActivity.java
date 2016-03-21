@@ -1,7 +1,12 @@
 package com.example.greengiant.canopy2;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.p2p.WifiP2pDeviceList;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -35,6 +40,11 @@ public class CreateShadeActivity extends Activity {
     int userId = 10;
     NestAPI nest;
 
+    WifiP2pManager mManager;
+    WifiP2pManager.Channel mChannel;
+    BroadcastReceiver mReceiver;
+    IntentFilter mIntentFilter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -46,6 +56,16 @@ public class CreateShadeActivity extends Activity {
         nest.setConfig(Constants.PRODUCT_ID, Constants.PRODUCT_SECRET, Constants.REDIRECT_URL);
 
         new GetRoomsAndThermostatsTask().execute();
+
+        mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        mChannel = mManager.initialize(this, getMainLooper(), null);
+        mReceiver = new WiFiDirectBroadcastReceiver(mManager, mChannel, this);
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
     }
 
     public void setupActivity(){
@@ -75,6 +95,23 @@ public class CreateShadeActivity extends Activity {
                     shade.setThermostat_id(thermostatAdapter.getItem(thermostatSpinner.getSelectedItemPosition()).getId());
                     new CreateShadeTask().execute();
                 }
+            }
+        });
+
+        mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+                Toast t = Toast.makeText(CreateShadeActivity.this, "Success!", Toast.LENGTH_LONG);
+                mManager.requestPeers(mChannel, new WifiP2pManager.PeerListListener() {
+                    @Override
+                    public void onPeersAvailable(WifiP2pDeviceList peers){
+                        Toast t = Toast.makeText(CreateShadeActivity.this, "Peers!", Toast.LENGTH_LONG);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int reasonCode) {
             }
         });
     }
@@ -174,5 +211,18 @@ public class CreateShadeActivity extends Activity {
             DynamoDBManager.updateUser(user);
             return null;
         }
+    }
+
+    /* register the broadcast receiver with the intent values to be matched */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mReceiver, mIntentFilter);
+    }
+    /* unregister the broadcast receiver */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mReceiver);
     }
 }
