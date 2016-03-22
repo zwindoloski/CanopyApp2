@@ -1,15 +1,23 @@
 package com.example.greengiant.canopy2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothClass;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
+import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
+import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +31,10 @@ import com.nestlabs.sdk.NestException;
 import com.nestlabs.sdk.NestListener;
 import com.nestlabs.sdk.Thermostat;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Zack on 2/14/2016. Used to create a new shade
@@ -39,10 +50,17 @@ public class CreateShadeActivity extends Activity {
     User user = null;
     NestAPI nest;
 
-    WifiP2pManager mManager;
-    WifiP2pManager.Channel mChannel;
-    BroadcastReceiver mReceiver;
-    IntentFilter mIntentFilter;
+    WifiManager myWifiManager;
+    boolean wasEnabled;
+
+    String shadeID;
+    Spinner networkSpinner;
+    ArrayList<String> networks = new ArrayList<>();
+    ArrayAdapter<String> networkAdapter;
+//    WifiP2pManager mManager;
+//    WifiP2pManager.Channel mChannel;
+//    BroadcastReceiver mReceiver;
+//    IntentFilter mIntentFilter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,18 +74,67 @@ public class CreateShadeActivity extends Activity {
 
         new GetRoomsAndThermostatsTask().execute();
 
-        mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
-        mChannel = mManager.initialize(this, getMainLooper(), null);
-        mReceiver = new WiFiDirectBroadcastReceiver(mManager, mChannel, this);
+        myWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wasEnabled = myWifiManager.isWifiEnabled();
+        myWifiManager.setWifiEnabled(true);
+        while(!myWifiManager.isWifiEnabled()){}
 
-        mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+//        mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+//        mChannel = mManager.initialize(this, getMainLooper(), null);
+//        mReceiver = new WiFiDirectBroadcastReceiver(mManager, mChannel, this);
+//
+//        mIntentFilter = new IntentFilter();
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
     }
 
     public void setupActivity(){
+        // get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.prompts, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.editTextDialogUserInput);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                shadeID = userInput.getText().toString();
+                                new GetNetworksTask().execute();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                                finish();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+        networkSpinner = (Spinner) findViewById(R.id.spinner_networks);
+
+        networkAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, networks );
+        networkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        networkSpinner.setAdapter(networkAdapter);
+
+
+
         final Spinner roomSpinner = (Spinner) findViewById(R.id.spinner_rooms);
         final ArrayAdapter<Room> roomArrayAdapter = new ArrayAdapter<Room>(CreateShadeActivity.this, android.R.layout.simple_spinner_item, rooms);
         roomArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,22 +164,6 @@ public class CreateShadeActivity extends Activity {
             }
         });
 
-        mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-                Toast t = Toast.makeText(CreateShadeActivity.this, "Success!", Toast.LENGTH_LONG);
-                mManager.requestPeers(mChannel, new WifiP2pManager.PeerListListener() {
-                    @Override
-                    public void onPeersAvailable(WifiP2pDeviceList peers){
-                        Toast t = Toast.makeText(CreateShadeActivity.this, "Peers!", Toast.LENGTH_LONG);
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(int reasonCode) {
-            }
-        });
     }
 
     private class CreateShadeTask extends AsyncTask<Void, Void, Void> {
@@ -128,7 +179,43 @@ public class CreateShadeActivity extends Activity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplicationContext().startActivity(intent);
         }
+    }
 
+    private class GetNetworksTask extends AsyncTask<Void, Void, Void>{
+        protected  Void doInBackground(Void... voids){
+            boolean foundShade = false;
+
+            networks = new ArrayList<String>();
+
+            if(myWifiManager.isWifiEnabled()){
+                if(myWifiManager.startScan()){
+                    // List available APs
+                    List<ScanResult> scans = myWifiManager.getScanResults();
+                    if(scans != null && !scans.isEmpty()){
+                        for (ScanResult scan : scans) {
+                            if(scan.SSID.contains(shadeID))
+                                foundShade = true;
+
+                            networks.add(scan.SSID);
+                            System.out.println(scan.SSID);
+                        }
+                    }
+                }
+            }
+
+//            CreateShadeActivity.this.runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    networkAdapter.notifyDataSetChanged();
+//                }
+//            });
+
+
+            return null;
+        }
+        protected void onPostExecute(Void results){
+            super.onPostExecute(results);
+        }
     }
 
     private class GetRoomsAndThermostatsTask extends AsyncTask<Void, Void, Void>{
@@ -178,7 +265,6 @@ public class CreateShadeActivity extends Activity {
             super.onPostExecute(results);
             setupActivity();
         }
-
     }
 
     private void fetchData() {
@@ -212,16 +298,4 @@ public class CreateShadeActivity extends Activity {
         }
     }
 
-    /* register the broadcast receiver with the intent values to be matched */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver(mReceiver, mIntentFilter);
-    }
-    /* unregister the broadcast receiver */
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(mReceiver);
-    }
 }
