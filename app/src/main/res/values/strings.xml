@@ -13,6 +13,7 @@
     <string name="create">Create</string>
     <string name="blank_room_name_toast">Room Name cannot be blank.</string>
     <string name="create_new_shade">Create New Shade</string>
+    <string name="creating_shade">Please stand by while we set up your shade.</string>
     <string name="shade_name">Shade Name</string>
     <string name="new_shade_hint">Name of New Shade</string>
     <string name="blank_shade_name_error_toast">Shade Name cannot be blank.</string>

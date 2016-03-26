@@ -4,6 +4,30 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+    <LinearLayout
+        android:id="@+id/create_shade_loading_linearl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/creating_shade"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical" />
+
+        <ProgressBar
+            android:id="@+id/create_shade_progress_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:visibility="visible" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
