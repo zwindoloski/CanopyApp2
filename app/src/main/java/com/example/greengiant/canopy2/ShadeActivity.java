@@ -81,9 +81,7 @@ public class ShadeActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        System.out.println(requestCode+" "+resultCode);
         if (resultCode == RESULT_OK) {
-            //toast
             Toast.makeText(getApplicationContext(), "Your shade has been successfully connected", Toast.LENGTH_LONG).show();
         }
     }

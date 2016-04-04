@@ -29,17 +29,17 @@ public class CreateRoomActivity extends Activity {
 
         createRoomButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String roomName = roomNameET.getText().toString();
-                if(roomName.equals("")){
-                    Toast t = Toast.makeText(CreateRoomActivity.this, R.string.blank_room_name_toast, Toast.LENGTH_LONG);
-                    t.show();
-                }
-                else {
-                    room.setName(roomName);
-                    room.setUser_id(Constants.USER_ID);
-                    room.setRun_mode(modeSpinner.getSelectedItem().toString());
-                    new CreateRoomTask().execute();
-                }
+            String roomName = roomNameET.getText().toString();
+            if(roomName.equals("")){
+                Toast t = Toast.makeText(CreateRoomActivity.this, R.string.blank_room_name_toast, Toast.LENGTH_LONG);
+                t.show();
+            }
+            else {
+                room.setName(roomName);
+                room.setUser_id(Constants.USER_ID);
+                room.setRun_mode(modeSpinner.getSelectedItem().toString());
+                new CreateRoomTask().execute();
+            }
             }
         });
     }
@@ -53,9 +53,9 @@ public class CreateRoomActivity extends Activity {
 
         protected void onPostExecute(Void results) {
             super.onPostExecute(results);
-            Intent intent = new Intent(CreateRoomActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplicationContext().startActivity(intent);
+            setResult(RESULT_OK);
+            Toast.makeText(getApplicationContext(), "Your room has been successfully created", Toast.LENGTH_LONG).show();
+            finish();
         }
 
     }

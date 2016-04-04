@@ -52,7 +52,7 @@
     <string name="schedule_mode">Schedule</string>
     <string name="open_mode">Open</string>
     <string name="closed_mode">Closed</string>
-    <string name="user_mode">User</string>
+    <string name="user_mode">Home</string>
     <string name="room_mode">Room</string>
 
     <string-array name="shade_run_mode">
