@@ -56,4 +56,18 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom">
+
+
+        <Button
+            android:id="@+id/connect_shade_bttn"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="@string/edit_connection"/>
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -6,6 +6,10 @@ package com.example.greengiant.canopy2;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 @DynamoDBTable(tableName = "Shades")
 public class Shade {
+    private boolean cancel_override;
+    private boolean overriding;
+    private String updated_at;
+    private String device_serial_number;
     private String name;
     private String status;
     private String run_mode;
@@ -27,6 +31,24 @@ public class Shade {
 
     public void setId(String id){
         this.id = id;
+    }
+
+    @DynamoDBAttribute(attributeName = "device_serial_number")
+    public String getDevice_serial_number(){
+        return device_serial_number;
+    }
+
+    public void setDevice_serial_number(String device_serial_number){
+        this.device_serial_number = device_serial_number;
+    }
+
+    @DynamoDBAttribute(attributeName = "updated_at")
+    public String getUpdated_at(){
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at){
+        this.updated_at = updated_at;
     }
 
     @DynamoDBAttribute(attributeName = "name")
@@ -63,6 +85,24 @@ public class Shade {
 
     public void setAway(boolean away) {
         this.away = away;
+    }
+
+    @DynamoDBAttribute(attributeName = "overriding")
+    public boolean isOverriding() {
+        return overriding;
+    }
+
+    public void setOverriding(boolean overriding) {
+        this.overriding = overriding;
+    }
+
+    @DynamoDBAttribute(attributeName = "cancel_override")
+    public boolean isCancel_override() {
+        return cancel_override;
+    }
+
+    public void setCancel_override(boolean cancel_override) {
+        this.cancel_override = cancel_override;
     }
 
     @DynamoDBAttribute(attributeName = "current_temp")

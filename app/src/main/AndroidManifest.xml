@@ -45,6 +45,8 @@
             android:configChanges="orientation"/>
         <activity android:name="ConnectNestAccountActivity"
             android:configChanges="orientation"/>
+        <activity android:name="ConnectShadeActivity"
+            android:configChanges="orientation"/>
     </application>
 
 

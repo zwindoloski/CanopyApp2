@@ -17,10 +17,16 @@
     <string name="shade_name">Shade Name</string>
     <string name="new_shade_hint">Name of New Shade</string>
     <string name="blank_shade_name_error_toast">Shade Name cannot be blank.</string>
+    <string name="blank_shade_serial_error_toast">Shade Serial Number cannot be blank.</string>
+
     <string name="select_network">Select Your Network</string>
     <string name="network_password">Network Password</string>
     <string name="network_password_hint">Network Password</string>
     <string name="enter_shade_id">Enter the Shade ID\n(Found on the Device)</string>
+    <string name="connect">Connect</string>
+    <string name="edit_connection">Change Network Connection</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="shade_serial_hint">Found on Device</string>
 
     <string name="select_room">Select Room</string>
     <string name="run_mode">Run Mode</string>

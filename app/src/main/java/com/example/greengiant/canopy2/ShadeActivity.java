@@ -1,13 +1,16 @@
 package com.example.greengiant.canopy2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.res.Resources;
+import android.widget.Toast;
 
 import com.amazonaws.auth.policy.Resource;
 
@@ -64,6 +67,25 @@ public class ShadeActivity extends Activity {
                 //do nothing
             }
         });
+
+        final Button connectShadeButton = (Button) findViewById(R.id.connect_shade_bttn);
+        connectShadeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            //done
+            Intent intent = new Intent(ShadeActivity.this, ConnectShadeActivity.class);
+            intent.putExtra("SHADE_ID", shade.getId());
+            ShadeActivity.this.startActivityForResult(intent, 0);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        System.out.println(requestCode+" "+resultCode);
+        if (resultCode == RESULT_OK) {
+            //toast
+            Toast.makeText(getApplicationContext(), "Your shade has been successfully connected", Toast.LENGTH_LONG).show();
+        }
     }
 
     private class GetShadeTask extends AsyncTask<Void, Void, Void> {

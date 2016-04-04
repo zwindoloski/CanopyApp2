@@ -43,6 +43,14 @@ public class DynamoDBManager {
         mapper.save(shade);
     }
 
+    public static void deleteShade(Shade shade){
+
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        mapper.delete(shade);
+    }
+
     public static ArrayList<Room> getRoomList(){
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
