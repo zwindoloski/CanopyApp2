@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.res.Resources;
@@ -21,6 +22,7 @@ public class ShadeActivity extends Activity {
 
     private String shadeId = "";
     private Shade shade = null;
+    private LinearLayout overrideLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,12 +55,18 @@ public class ShadeActivity extends Activity {
             }
         }
 
+        overrideLayout = (LinearLayout) findViewById(R.id.override_layout);
+        if(shade.isOverriding())
+            overrideLayout.setVisibility(View.VISIBLE);
+
         spinnerRunMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Resources res = getResources();
                 String[] positions = res.getStringArray(R.array.shade_run_mode);
                 shade.setRun_mode(positions[position]);
+
+                overrideLayout.setVisibility(View.GONE);
                 new UpdateAttributeTask().execute();
             }
 
@@ -71,10 +79,17 @@ public class ShadeActivity extends Activity {
         final Button connectShadeButton = (Button) findViewById(R.id.connect_shade_bttn);
         connectShadeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            //done
-            Intent intent = new Intent(ShadeActivity.this, ConnectShadeActivity.class);
-            intent.putExtra("SHADE_ID", shade.getId());
-            ShadeActivity.this.startActivityForResult(intent, 0);
+                Intent intent = new Intent(ShadeActivity.this, ConnectShadeActivity.class);
+                intent.putExtra("SHADE_ID", shade.getId());
+                ShadeActivity.this.startActivityForResult(intent, 0);
+            }
+        });
+
+        final Button cancelOverrideButton = (Button) findViewById(R.id.cancel_override_bttn);
+        cancelOverrideButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                shade.setCancel_override(true);
+                new UpdateAttributeTask().execute();
             }
         });
     }

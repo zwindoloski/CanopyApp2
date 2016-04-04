@@ -57,10 +57,44 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/overriding_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/override_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/cancel_override_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/overriding"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_weight="0.7"
+                android:layout_gravity="center_horizontal"
+                android:gravity="bottom"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/cancel_override_bttn"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="@string/cancel_override"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/connect_shade_bttn"
