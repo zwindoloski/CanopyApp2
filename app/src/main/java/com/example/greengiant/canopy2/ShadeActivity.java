@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,6 +46,27 @@ public class ShadeActivity extends Activity {
         final TextView textViewVoltage = (TextView) findViewById(R.id.textViewVoltage);
         textViewVoltage.setText(String.valueOf(voltage));
 
+        final ImageView iconImageView = (ImageView) findViewById(R.id.imageViewIcon);
+        if(shade.getVoltage() >= Constants.BRIGHT){
+            iconImageView.setImageResource(R.drawable.sun);
+        }
+        else if(shade.getVoltage() >= Constants.PARTIAL){
+            iconImageView.setImageResource(R.drawable.cloud_sun);
+        }
+        else if(shade.getVoltage() >= Constants.CLOUDY){
+            iconImageView.setImageResource(R.drawable.cloud);
+        }
+        else if(shade.getVoltage() >= Constants.NIGHT){
+            iconImageView.setImageResource(R.drawable.moon);
+        }
+
+        final ImageButton refreshButton = (ImageButton) findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new GetShadeTask().execute();
+            }
+        });
+
         final Spinner spinnerRunMode = (Spinner) findViewById(R.id.spinnerShadeMode);
         if (shade.getRun_mode() != null) {
             Resources res = getResources();
@@ -62,12 +85,7 @@ public class ShadeActivity extends Activity {
         spinnerRunMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Resources res = getResources();
-                String[] positions = res.getStringArray(R.array.shade_run_mode);
-                shade.setRun_mode(positions[position]);
-
-                overrideLayout.setVisibility(View.GONE);
-                new UpdateAttributeTask().execute();
+                new UpdateRunModeTask().execute(new Integer[] {position});
             }
 
             @Override
@@ -88,8 +106,7 @@ public class ShadeActivity extends Activity {
         final Button cancelOverrideButton = (Button) findViewById(R.id.cancel_override_bttn);
         cancelOverrideButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                shade.setCancel_override(true);
-                new UpdateAttributeTask().execute();
+                new CancelOverideTask().execute();
             }
         });
     }
@@ -113,12 +130,37 @@ public class ShadeActivity extends Activity {
         }
     }
 
-    private class UpdateAttributeTask extends AsyncTask<Void, Void, Void>{
+    private class UpdateRunModeTask extends AsyncTask<Integer, Void, Void>{
 
-        protected Void doInBackground(Void... voids){
+        protected Void doInBackground(Integer...position){
+            shade = DynamoDBManager.getShade(shadeId);
+
+            Resources res = getResources();
+            String[] positions = res.getStringArray(R.array.shade_run_mode);
+            shade.setRun_mode(positions[position[0]]);
+
             DynamoDBManager.updateShade(shade);
             return null;
         }
 
+        protected void onPostExecute(Void results){
+            setupActivity();
+        }
+    }
+
+    private class CancelOverideTask extends AsyncTask<Void, Void, Void>{
+
+        protected Void doInBackground(Void... voids){
+            shade = DynamoDBManager.getShade(shadeId);
+
+            shade.setCancel_override(true);
+
+            DynamoDBManager.updateShade(shade);
+            return null;
+        }
+
+        protected void onPostExecute(Void results){
+            setupActivity();
+        }
     }
 }

@@ -15,4 +15,9 @@ public class Constants {
     public static final String PRODUCT_ID = "41eebbb2-6456-48b5-bd08-e1a8fb8e458a";
     public static final String PRODUCT_SECRET = "zo7ZYVakbA918vlWtIELwD9EE";
     public static final String REDIRECT_URL = "http://localhost/";
+
+    public static final int BRIGHT = 700;
+    public static final int PARTIAL = 500;
+    public static final int CLOUDY = 200;
+    public static final int NIGHT = 0;
 }

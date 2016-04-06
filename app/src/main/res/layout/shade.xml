@@ -56,12 +56,23 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/overriding_layout"
-        android:layout_width="fill_parent"
+    <ImageView
+        android:id="@+id/imageViewIcon"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/sun"
+        android:adjustViewBounds="true"
+        android:maxHeight="100dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
 
     </LinearLayout>
 
@@ -71,12 +82,24 @@
         android:gravity="bottom"
         android:orientation="vertical">
 
+        <ImageButton
+            android:background="#0000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/refreshButton"
+            android:src="@drawable/refresh_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:maxHeight="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"/>
+
         <LinearLayout
             android:id="@+id/override_layout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/cancel_override_text_view"
