@@ -47,7 +47,7 @@ public class DynamoDBManager {
     public static void deleteShade(Shade shade){
 
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
-        DynamoDBMapper mapper = new DynamoDBMapper(ddb, new DynamoDBMapperConfig(DynamoDBMapperConfig.SaveBehavior.UPDATE_SKIP_NULL_ATTRIBUTES));
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
         mapper.delete(shade);
     }

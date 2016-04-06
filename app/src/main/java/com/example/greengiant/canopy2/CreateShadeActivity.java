@@ -78,25 +78,25 @@ public class CreateShadeActivity extends Activity {
         final Button createShadeButton = (Button) findViewById(R.id.new_shade_create_bttn);
         createShadeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String shadeName = shadeNameET.getText().toString();
-                String shadeSerial = shadeSerialET.getText().toString();
-                if (shadeName.equals("")) {
-                    Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_name_error_toast, Toast.LENGTH_LONG);
-                    t.show();
-                } else if (shadeSerial.equals("")) {
-                    Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_serial_error_toast, Toast.LENGTH_LONG);
-                    t.show();
-                } else {
-                    shade.setDevice_serial_number(shadeSerial);
-                    shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
-                    shade.setName(shadeName);
-                    shade.setUser_id(Constants.USER_ID);
-                    shade.setAway(true);
-                    shade.setStatus("Open");
-                    shade.setRun_mode(modeSpinner.getSelectedItem().toString());
-                    shade.setThermostat_id(thermostatAdapter.getItem(thermostatSpinner.getSelectedItemPosition()).getId());
-                    new CreateShadeTask().execute();
-                }
+            String shadeName = shadeNameET.getText().toString();
+            String shadeSerial = shadeSerialET.getText().toString();
+            if (shadeName.equals("")) {
+                Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_name_error_toast, Toast.LENGTH_LONG);
+                t.show();
+            } else if (shadeSerial.equals("")) {
+                Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_serial_error_toast, Toast.LENGTH_LONG);
+                t.show();
+            } else {
+                shade.setDevice_serial_number(shadeSerial);
+                shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
+                shade.setName(shadeName);
+                shade.setUser_id(Constants.USER_ID);
+                shade.setAway(true);
+                shade.setStatus("Open");
+                shade.setRun_mode(modeSpinner.getSelectedItem().toString());
+                shade.setThermostat_id(thermostatAdapter.getItem(thermostatSpinner.getSelectedItemPosition()).getId());
+                new CreateShadeTask().execute();
+            }
             }
         });
 
@@ -109,10 +109,9 @@ public class CreateShadeActivity extends Activity {
             finish();
         }
         else{
-            //delete entry
-            DynamoDBManager.deleteShade(shade);
             //toast
-            Toast.makeText(getApplicationContext(), "We were unable to set up your shade, please try again", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your shade was created but is not connected to a network.\n Please go to the shade page to connect it.", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
