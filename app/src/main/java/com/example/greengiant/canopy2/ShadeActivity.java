@@ -20,7 +20,7 @@ import com.amazonaws.auth.policy.Resource;
 /**
  * Created by Zack on 2/7/2016.
  */
-public class ShadeActivity extends Activity {
+public class ShadeActivity extends CustomActivity {
 
     private String shadeId = "";
     private Shade shade = null;
@@ -28,7 +28,6 @@ public class ShadeActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shade);
 

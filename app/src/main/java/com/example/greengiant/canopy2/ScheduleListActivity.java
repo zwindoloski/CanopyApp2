@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Zack on 2/28/2016.
  */
-public class ScheduleListActivity extends ListActivity {
+public class ScheduleListActivity extends CustomListActivity {
     private ArrayList<Schedule> items = null;
     private ArrayList<String> labels = null;
     private int currentPosition = 0;

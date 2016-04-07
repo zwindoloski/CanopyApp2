@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Zack on 2/6/2016.
  */
-public class RoomListActivity extends ListActivity {
+public class RoomListActivity extends CustomListActivity {
     private ArrayList<Room> items = null;
     private ArrayList<String> labels = null;
     private ArrayAdapter<String> arrayAdapter = null;

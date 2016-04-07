@@ -10,77 +10,85 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:padding="10dp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView6" >
 
-        <TextView
-            android:id="@+id/textViewDayOfWeek"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/day_of_week"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/spinnerDayOfWeek"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/days_of_week"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textViewDayOfWeek"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/day_of_week"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/spinnerDayOfWeek"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/days_of_week"/>
 
-        <TextView
-            android:id="@+id/scheduleModeTextView"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/run_mode"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinnerScheduleMode"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/shade_run_mode"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/scheduleModeTextView"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/run_mode"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-        <TextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/start_time"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
-        <TimePicker
-            android:id="@+id/schedule_update_time_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom">
+                <Spinner
+                    android:id="@+id/spinnerScheduleMode"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/shade_run_mode"/>
 
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/update_schedule_bttn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/update"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
+                <TimePicker
+                    android:id="@+id/schedule_update_time_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/update_schedule_bttn"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="@string/update"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

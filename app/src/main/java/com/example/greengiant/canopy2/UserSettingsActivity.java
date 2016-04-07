@@ -12,7 +12,7 @@ import android.widget.TextView;
 /**
  * Created by Zack on 2/13/2016.
  */
-public class UserSettingsActivity extends Activity {
+public class UserSettingsActivity extends CustomActivity {
     private User user = null;
 
     @Override

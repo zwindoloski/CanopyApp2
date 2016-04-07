@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:padding="10dp" />
 
     <LinearLayout
         android:id="@+id/network_for_shade_linear_layout"
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="@string/select_network"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            android:layout_weight="0.6"/>
 
         <Spinner
             android:id="@+id/spinner_networks"
@@ -79,26 +80,19 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textViewConnectShade"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="Press the reset button on your shade before clicking connect"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        android:layout_marginTop="20dp" />
 
-        <TextView
-            android:id="@+id/textViewConnectShade"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Press the reset button on your shade before clicking connect"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center"/>
-
-        <Button
-            android:id="@+id/connect_shade_bttn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/connect"/>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/connect_shade_bttn"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="@string/connect"/>
 
 </LinearLayout>

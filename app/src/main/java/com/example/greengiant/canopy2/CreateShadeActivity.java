@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by Zack on 2/14/2016. Used to create a new shade
  */
-public class CreateShadeActivity extends Activity {
+public class CreateShadeActivity extends CustomActivity {
     Shade shade = new Shade();
     ArrayList<Room> rooms = null;
 

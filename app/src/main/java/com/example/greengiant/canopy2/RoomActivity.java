@@ -12,7 +12,7 @@ import android.widget.TextView;
 /**
  * Created by Zack on 2/13/2016.
  */
-public class RoomActivity extends Activity {
+public class RoomActivity extends CustomActivity {
     private String roomId = "";
     private Room room = null;
 

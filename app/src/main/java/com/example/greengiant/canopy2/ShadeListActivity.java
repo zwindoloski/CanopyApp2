@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Zack on 2/6/2016.
  */
-public class ShadeListActivity extends ListActivity {
+public class ShadeListActivity extends CustomListActivity {
     private ArrayList<Shade> items = null;
     private ArrayList<String> labels = null;
     private int currentPosition = 0;
