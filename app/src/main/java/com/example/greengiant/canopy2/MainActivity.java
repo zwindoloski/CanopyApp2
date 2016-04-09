@@ -11,7 +11,7 @@ import android.widget.Toast;
 /**
  * Created by Zack on 2/6/2016.
  */
-public class MainActivity extends Activity{
+public class MainActivity extends CustomActivity{
     public static AmazonClientManager clientManager = null;
 
     @Override

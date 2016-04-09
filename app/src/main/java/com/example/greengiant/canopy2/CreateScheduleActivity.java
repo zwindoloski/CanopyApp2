@@ -10,7 +10,7 @@ import android.widget.Toast;
 /**
  * Created by Zachary on 2/20/2016.
  */
-public class CreateScheduleActivity extends Activity {
+public class CreateScheduleActivity extends CustomActivity {
     int SHADE_SCHED = 0;
     int ROOM_SCHED = 1;
     int USER_SCHED = 2;

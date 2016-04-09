@@ -15,7 +15,7 @@ import java.util.Calendar;
 /**
  * Created by Justin on 2/21/2016.
  */
-public class ConnectNestAccountActivity extends Activity {
+public class ConnectNestAccountActivity extends CustomActivity {
     // A request code you can verify later.
     int AUTH_TOKEN_REQUEST_CODE = 123;
 

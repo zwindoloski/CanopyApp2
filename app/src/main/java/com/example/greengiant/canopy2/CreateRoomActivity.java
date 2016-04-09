@@ -13,7 +13,7 @@ import android.widget.Toast;
 /**
  * Created by Zack on 2/14/2016.
  */
-public class CreateRoomActivity extends Activity {
+public class CreateRoomActivity extends CustomActivity {
     Room room = new Room();
 
     @Override

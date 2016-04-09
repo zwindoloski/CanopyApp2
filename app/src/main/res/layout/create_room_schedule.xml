@@ -12,113 +12,120 @@
         android:gravity="center"
         android:padding="10dp"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView3" >
 
-        <TextView
-            android:id="@+id/schedule_name_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/schedule_name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/schedule_name_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/enter_schedule_name"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/schedule_name_text_view"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/schedule_name"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/schedule_name_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/enter_schedule_name"/>
 
-        <TextView
-            android:id="@+id/room_for_schedule_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/room"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinner_rooms"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/room_for_schedule_text_view"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/room"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-        <TextView
-            android:id="@+id/roomScheduleModeTextView"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/run_mode"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+                <Spinner
+                    android:id="@+id/spinner_rooms"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinnerRoomScheduleMode"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/schedule_run_mode"/>
-    </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/roomScheduleModeTextView"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/run_mode"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-        <TextView
-            android:id="@+id/day_of_week_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/day_of_week"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+                <Spinner
+                    android:id="@+id/spinnerRoomScheduleMode"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/schedule_run_mode"/>
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinner_day_of_week"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/days_of_week"/>
-    </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/time_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/start_time"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
-        <TimePicker
-            android:id="@+id/schedule_time_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom">
+                <TextView
+                    android:id="@+id/day_of_week_text_view"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/day_of_week"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
+                <Spinner
+                    android:id="@+id/spinner_day_of_week"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/days_of_week"/>
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/create_room_schedule_bttn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/create"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/time_text_view"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_time"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
+                <TimePicker
+                    android:id="@+id/schedule_time_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/create_room_schedule_bttn"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="@string/create"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/schedule_name"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            android:layout_weight="0.6"/>
 
         <EditText
             android:id="@+id/schedule_name_edit_text"
@@ -33,7 +33,7 @@
 
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="@string/run_mode"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            android:layout_weight="0.6"/>
 
         <Spinner
             android:id="@+id/spinnerUserScheduleMode"
@@ -53,7 +53,7 @@
             android:entries="@array/schedule_run_mode"/>
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="@string/day_of_week"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            android:layout_weight="0.6"/>
 
         <Spinner
             android:id="@+id/spinner_day_of_week"
@@ -72,7 +72,7 @@
             android:layout_weight="1"
             android:entries="@array/days_of_week"/>
     </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
@@ -82,24 +82,18 @@
             android:layout_height="wrap_content"
             android:text="@string/start_time"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            android:layout_weight="0.6"/>
         <TimePicker
             android:id="@+id/schedule_time_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <LinearLayout
+
+    <Button
+        android:id="@+id/create_home_schedule_bttn"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom">
+        android:layout_height="50dp"
+        android:text="@string/create"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-
-        <Button
-            android:id="@+id/create_home_schedule_bttn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/create"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    </LinearLayout>
 </LinearLayout>

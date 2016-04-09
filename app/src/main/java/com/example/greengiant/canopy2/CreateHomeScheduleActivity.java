@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by Zachary on 2/20/2016.
  */
-public class CreateHomeScheduleActivity extends Activity {
+public class CreateHomeScheduleActivity extends CustomActivity {
     Schedule schedule;
 
     @Override

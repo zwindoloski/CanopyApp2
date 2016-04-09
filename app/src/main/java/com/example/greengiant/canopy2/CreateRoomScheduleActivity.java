@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Zachary on 2/20/2016.
  */
-public class CreateRoomScheduleActivity extends Activity {
+public class CreateRoomScheduleActivity extends CustomActivity {
     ArrayList<Room> rooms = null;
     Schedule schedule;
 

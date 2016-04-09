@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:text="@string/run_mode"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            android:layout_weight="0.6"/>
 
         <Spinner
             android:id="@+id/spinnerRoomModeCreate"
@@ -56,17 +56,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/newRoomCreateBttn"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom">
+        android:layout_height="50dp"
+        android:text="@string/create"/>
 
-
-        <Button
-            android:id="@+id/newRoomCreateBttn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/create"/>
-
-    </LinearLayout>
 </LinearLayout>

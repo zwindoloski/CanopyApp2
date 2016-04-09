@@ -51,7 +51,7 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by Justin on 3/29/2016.
  */
-public class ConnectShadeActivity extends Activity{
+public class ConnectShadeActivity extends CustomActivity{
 
     private String shadeID = "";
     private Shade shade = null;

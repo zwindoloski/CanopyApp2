@@ -13,123 +13,128 @@
         android:padding="10dp"/>
 
 
-    <LinearLayout
-        android:id="@+id/create_shade_linear1"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView4" >
 
-        <TextView
-            android:id="@+id/create_shade_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/shade_name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.6"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/create_shade_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/new_shade_hint"/>
+            <LinearLayout
+                android:id="@+id/create_shade_linear1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/create_shade_text_view"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shade_name"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/create_shade_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/new_shade_hint"/>
 
-        <TextView
-            android:id="@+id/ShadeSerialCreate"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/serial_number"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/create_shade_serial_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/shade_serial_hint"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/ShadeSerialCreate"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/serial_number"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/create_shade_serial_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/shade_serial_hint"/>
 
-        <TextView
-            android:id="@+id/ShadeModeCreate"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/run_mode"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinnerShadeModeCreate"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/shade_run_mode"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/ShadeModeCreate"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/run_mode"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-    <LinearLayout
-        android:id="@+id/room_for_shade_linear_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/spinnerShadeModeCreate"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/shade_run_mode"/>
 
-        <TextView
-            android:id="@+id/room_for_shade_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/select_room"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinner_rooms"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/room_for_shade_linear_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/room_for_shade_text_view"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_room"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-    <LinearLayout
-        android:id="@+id/thermostat_for_shade_linear_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/spinner_rooms"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/thermostat_for_shade_text_view"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="@string/select_thermostat"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_weight="0.7"/>
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinner_thermostats"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/thermostat_for_shade_linear_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/thermostat_for_shade_text_view"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_thermostat"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_weight="0.6"/>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom">
+                <Spinner
+                    android:id="@+id/spinner_thermostats"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/new_shade_create_bttn"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="@string/create"/>
+            <Button
+                android:id="@+id/new_shade_create_bttn"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="@string/create"/>
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 </LinearLayout>

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by Zachary on 2/20/2016.
  */
-public class CreateShadeScheduleActivity extends Activity {
+public class CreateShadeScheduleActivity extends CustomActivity {
     ArrayList<Shade> shades = null;
     Schedule schedule;
 

@@ -19,7 +19,7 @@ import java.sql.Time;
 /**
  * Created by Zack on 2/28/2016.
  */
-public class ScheduleActivity extends Activity {
+public class ScheduleActivity extends CustomActivity {
     private String scheduleId = "";
     private Schedule schedule = null;
 
