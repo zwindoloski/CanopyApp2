@@ -69,6 +69,16 @@
     <string name="closed_mode">Closed</string>
     <string name="user_mode">Home</string>
     <string name="room_mode">Room</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_new_user">Create New User</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="passwords_dont_match">Passwords do not match.</string>
+    <string name="username_taken">Username has been taken. Try another.</string>
+    <string name="password_blank">Password is blank.</string>
+    <string name="username_blank">Username is blank.</string>
+    <string name="logout">Logout</string>
 
     <string-array name="shade_run_mode">
         <item>@string/manual_mode</item>

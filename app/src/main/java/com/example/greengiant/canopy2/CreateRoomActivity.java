@@ -2,6 +2,7 @@ package com.example.greengiant.canopy2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +37,9 @@ public class CreateRoomActivity extends CustomActivity {
             }
             else {
                 room.setName(roomName);
-                room.setUser_id(Constants.USER_ID);
+                SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+                String user_id = settings.getString("user_id", "");
+                room.setUser_id(user_id);
                 room.setRun_mode(modeSpinner.getSelectedItem().toString());
                 new CreateRoomTask().execute();
             }
