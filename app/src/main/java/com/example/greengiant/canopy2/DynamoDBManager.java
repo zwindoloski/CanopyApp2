@@ -1,6 +1,7 @@
 package com.example.greengiant.canopy2;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapperConfig;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
@@ -41,6 +42,14 @@ public class DynamoDBManager {
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
         mapper.save(shade);
+    }
+
+    public static void deleteShade(Shade shade){
+
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        mapper.delete(shade);
     }
 
     public static ArrayList<Room> getRoomList(){

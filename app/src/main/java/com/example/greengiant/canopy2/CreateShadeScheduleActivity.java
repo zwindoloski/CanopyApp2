@@ -77,9 +77,8 @@ public class CreateShadeScheduleActivity extends Activity {
 
         protected void onPostExecute(Void results) {
             super.onPostExecute(results);
-            Intent intent = new Intent(CreateShadeScheduleActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplicationContext().startActivity(intent);
+            setResult(RESULT_OK);
+            finish();
         }
 
     }

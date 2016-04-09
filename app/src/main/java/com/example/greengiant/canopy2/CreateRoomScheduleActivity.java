@@ -76,9 +76,8 @@ public class CreateRoomScheduleActivity extends Activity {
 
         protected void onPostExecute(Void results) {
             super.onPostExecute(results);
-            Intent intent = new Intent(CreateRoomScheduleActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplicationContext().startActivity(intent);
+            setResult(RESULT_OK);
+            finish();
         }
 
     }

@@ -5,7 +5,7 @@
     <string name="add_shade">Add Shade</string>
     <string name="add_room">Add Room</string>
     <string name="shade_position">Shade Position</string>
-    <string name="current_voltage">Current Voltage</string>
+    <string name="current_voltage">Current Light Level</string>
     <string name="your_settings">Your Settings</string>
     <string name="create_new_room">Create New Room</string>
     <string name="room_name">Room Name</string>
@@ -13,9 +13,21 @@
     <string name="create">Create</string>
     <string name="blank_room_name_toast">Room Name cannot be blank.</string>
     <string name="create_new_shade">Create New Shade</string>
+    <string name="creating_shade">Please stand by while we set up your shade.</string>
     <string name="shade_name">Shade Name</string>
     <string name="new_shade_hint">Name of New Shade</string>
     <string name="blank_shade_name_error_toast">Shade Name cannot be blank.</string>
+    <string name="blank_shade_serial_error_toast">Shade Serial Number cannot be blank.</string>
+
+    <string name="select_network">Select Your Network</string>
+    <string name="network_password">Network Password</string>
+    <string name="network_password_hint">Network Password</string>
+    <string name="enter_shade_id">Enter the Shade ID\n(Found on the Device)</string>
+    <string name="connect">Connect</string>
+    <string name="edit_connection">Change Network Connection</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="shade_serial_hint">Found on Device</string>
+
     <string name="select_room">Select Room</string>
     <string name="run_mode">Run Mode</string>
     <string name="add_schedule">Add Schedule</string>
@@ -34,13 +46,15 @@
     <string name="select_thermostat">Select Thermostat</string>
     <string name="view_schedules">View All Schedules</string>
     <string name="update">Update</string>
+    <string name="overriding">This shade has been manually overridden.</string>
+    <string name="cancel_override">Cancel Manual Override</string>
 
     <string name="manual_mode">Manual</string>
     <string name="energy_mode">Energy Saving</string>
     <string name="schedule_mode">Schedule</string>
     <string name="open_mode">Open</string>
     <string name="closed_mode">Closed</string>
-    <string name="user_mode">User</string>
+    <string name="user_mode">Home</string>
     <string name="room_mode">Room</string>
 
     <string-array name="shade_run_mode">

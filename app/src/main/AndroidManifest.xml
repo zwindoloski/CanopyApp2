@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.greengiant.canopy2">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:supportsRtl="true"
@@ -40,6 +44,8 @@
         <activity android:name="CreateHomeScheduleActivity"
             android:configChanges="orientation"/>
         <activity android:name="ConnectNestAccountActivity"
+            android:configChanges="orientation"/>
+        <activity android:name="ConnectShadeActivity"
             android:configChanges="orientation"/>
     </application>
 
