@@ -51,6 +51,8 @@
             android:configChanges="orientation"/>
         <activity android:name="ConnectShadeActivity"
             android:configChanges="orientation"/>
+        <activity android:name="SunlightGraphActivity"
+            android:configChanges="orientation"/>
     </application>
 
 

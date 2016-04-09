@@ -19,6 +19,19 @@
     <string name="blank_shade_name_error_toast">Shade Name cannot be blank.</string>
     <string name="blank_shade_serial_error_toast">Shade Serial Number cannot be blank.</string>
 
+    <string name="view_sunlight_graph">View Sunlight Graph</string>
+    <string name="sunlight_graph">Recorded Light Levels</string>
+    <string name="sunlight_granularity">Show data by</string>
+    <string name="by_day">Day</string>
+    <string name="by_week">Week</string>
+    <string name="by_month">Month</string>
+    <string name="by_year">Year</string>
+    <string-array name="sunlight_granularity">
+        <item>@string/by_day</item>
+        <item>@string/by_week</item>
+        <item>@string/by_month</item>
+    </string-array>
+
     <string name="select_network">Select Your Network</string>
     <string name="network_password">Network Password</string>
     <string name="network_password_hint">Network Password</string>

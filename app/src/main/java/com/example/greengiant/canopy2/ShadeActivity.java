@@ -1,6 +1,5 @@
 package com.example.greengiant.canopy2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.res.Resources;
 import android.widget.Toast;
-
-import com.amazonaws.auth.policy.Resource;
 
 /**
  * Created by Zack on 2/7/2016.
@@ -90,6 +87,15 @@ public class ShadeActivity extends CustomActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //do nothing
+            }
+        });
+
+        final Button viewSunlightButton = (Button) findViewById(R.id.view_sunlight_bttn);
+        viewSunlightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ShadeActivity.this, SunlightGraphActivity.class);
+                intent.putExtra("SHADE_ID", shade.getId());
+                ShadeActivity.this.startActivity(intent);
             }
         });
 
