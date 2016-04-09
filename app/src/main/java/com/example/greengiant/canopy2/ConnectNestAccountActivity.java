@@ -2,6 +2,7 @@ package com.example.greengiant.canopy2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,7 +58,9 @@ public class ConnectNestAccountActivity extends CustomActivity {
     private class GetUserTask extends AsyncTask<Void, Void, Void> {
 
         protected Void doInBackground(Void... voids){
-            user = DynamoDBManager.getUser(Constants.USER_ID);
+            SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+            String user_id = settings.getString("user_id", "");
+            user = DynamoDBManager.getUser(user_id);
             return null;
         }
     }

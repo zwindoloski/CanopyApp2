@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -78,25 +79,27 @@ public class CreateShadeActivity extends CustomActivity {
         final Button createShadeButton = (Button) findViewById(R.id.new_shade_create_bttn);
         createShadeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            String shadeName = shadeNameET.getText().toString();
-            String shadeSerial = shadeSerialET.getText().toString();
-            if (shadeName.equals("")) {
-                Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_name_error_toast, Toast.LENGTH_LONG);
-                t.show();
-            } else if (shadeSerial.equals("")) {
-                Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_serial_error_toast, Toast.LENGTH_LONG);
-                t.show();
-            } else {
-                shade.setDevice_serial_number(shadeSerial);
-                shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
-                shade.setName(shadeName);
-                shade.setUser_id(Constants.USER_ID);
-                shade.setAway(true);
-                shade.setStatus("Open");
-                shade.setRun_mode(modeSpinner.getSelectedItem().toString());
-                shade.setThermostat_id(thermostatAdapter.getItem(thermostatSpinner.getSelectedItemPosition()).getId());
-                new CreateShadeTask().execute();
-            }
+                String shadeName = shadeNameET.getText().toString();
+                String shadeSerial = shadeSerialET.getText().toString();
+                if (shadeName.equals("")) {
+                    Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_name_error_toast, Toast.LENGTH_LONG);
+                    t.show();
+                } else if (shadeSerial.equals("")) {
+                    Toast t = Toast.makeText(CreateShadeActivity.this, R.string.blank_shade_serial_error_toast, Toast.LENGTH_LONG);
+                    t.show();
+                } else {
+                    shade.setDevice_serial_number(shadeSerial);
+                    shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
+                    shade.setName(shadeName);
+                    SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+                    String user_id = settings.getString("user_id", "");
+                    shade.setUser_id(user_id);
+                    shade.setAway(true);
+                    shade.setStatus("Open");
+                    shade.setRun_mode(modeSpinner.getSelectedItem().toString());
+                    shade.setThermostat_id(thermostatAdapter.getItem(thermostatSpinner.getSelectedItemPosition()).getId());
+                    new CreateShadeTask().execute();
+                }
             }
         });
 
@@ -138,7 +141,9 @@ public class CreateShadeActivity extends CustomActivity {
         protected  Void doInBackground(Void... voids){
 
             rooms = DynamoDBManager.getRoomList();
-            user = DynamoDBManager.getUser(Constants.USER_ID);
+            SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+            String user_id = settings.getString("user_id", "");
+            user = DynamoDBManager.getUser(user_id);
             String token = user.getAccess_token();
 
             //populate thermostat list

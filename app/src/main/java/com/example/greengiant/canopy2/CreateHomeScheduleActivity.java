@@ -3,6 +3,7 @@ package com.example.greengiant.canopy2;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,7 +54,9 @@ public class CreateHomeScheduleActivity extends CustomActivity {
                     schedule.setRun_mode(shadeModeSpinner.getSelectedItem().toString());
                     schedule.setItem_type("User");
                     schedule.setName(scheduleName);
-                    schedule.setItem_id(Constants.USER_ID);
+                    SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+                    String user_id = settings.getString("user_id", "");
+                    schedule.setItem_id(user_id);
                     schedule.setStart_time(time);
                     new CreateScheduleTask().execute();
                 }

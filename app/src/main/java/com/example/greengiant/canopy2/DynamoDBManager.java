@@ -29,13 +29,16 @@ public class DynamoDBManager {
     public static ArrayList<Shade> getShadeList(){
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
-
+        SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+        String user_id = settings.getString("user_id", "");
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Shade> result = mapper.scan(
                 Shade.class, scanExpression);
         ArrayList<Shade> resultList = new ArrayList<>();
         for (Shade shade : result) {
-            resultList.add(shade);
+            if(shade.getUser_id().equals(user_id)) {
+                resultList.add(shade);
+            }
         }
         return resultList;
     }
@@ -68,12 +71,17 @@ public class DynamoDBManager {
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
+        SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+        String user_id = settings.getString("user_id", "");
+
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Room> result = mapper.scan(
                 Room.class, scanExpression);
         ArrayList<Room> resultList = new ArrayList<>();
         for (Room room : result) {
-            resultList.add(room);
+            if(room.getUser_id().equals(user_id)) {
+                resultList.add(room);
+            }
         }
         return resultList;
     }
@@ -119,12 +127,17 @@ public class DynamoDBManager {
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
+        SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+        String user_id = settings.getString("user_id", "");
+
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Schedule> result = mapper.scan(
                 Schedule.class, scanExpression);
         ArrayList<Schedule> resultList = new ArrayList<>();
         for (Schedule schedule : result) {
-            resultList.add(schedule);
+            if(schedule.getUser_id().equals(user_id)) {
+                resultList.add(schedule);
+            }
         }
         return resultList;
     }
@@ -182,7 +195,8 @@ public class DynamoDBManager {
             SharedPreferences settings = context.getSharedPreferences("user_data", context.MODE_PRIVATE);
             SharedPreferences.Editor edit = settings.edit();
             edit.clear();
-            edit.putString("user_id", result.getItems().get(0).get("id").toString());
+            String user_id = result.getItems().get(0).get("id").getS();
+            edit.putString("user_id", user_id);
             edit.commit();
             return true;
         }else{

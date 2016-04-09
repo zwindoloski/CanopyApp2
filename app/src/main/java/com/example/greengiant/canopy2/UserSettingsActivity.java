@@ -35,18 +35,18 @@ public class UserSettingsActivity extends CustomActivity {
     }
 
     private void setupActivity() {
-        String userName = user.getUsername();
-
-        final TextView textViewUsername = (TextView) findViewById(R.id.textViewUserName);
-        textViewUsername.setText(userName);
-
         final Spinner spinnerRunMode = (Spinner) findViewById(R.id.spinnerUserMode);
-        if (user.getRun_mode() != null) {
-            Resources res = getResources();
-            String[] positions = res.getStringArray(R.array.user_run_mode);
-            for (int i=0; i<positions.length;i++){
-                if (positions[i].equalsIgnoreCase(user.getRun_mode())){
-                    spinnerRunMode.setSelection(i,true);
+        final TextView textViewUsername = (TextView) findViewById(R.id.textViewUserName);
+        if(user != null) {
+            String userName = user.getUsername();
+            textViewUsername.setText(userName);
+            if (user.getRun_mode() != null) {
+                Resources res = getResources();
+                String[] positions = res.getStringArray(R.array.user_run_mode);
+                for (int i=0; i<positions.length;i++){
+                    if (positions[i].equalsIgnoreCase(user.getRun_mode())){
+                        spinnerRunMode.setSelection(i,true);
+                    }
                 }
             }
         }
@@ -70,7 +70,9 @@ public class UserSettingsActivity extends CustomActivity {
     private class GetUserSettingsTask extends AsyncTask<Void, Void, Void> {
 
         protected Void doInBackground(Void... voids){
-            user = DynamoDBManager.getUser(Constants.USER_ID);
+            SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
+            String user_id = settings.getString("user_id", "");
+            user = DynamoDBManager.getUser(user_id);
             return null;
         }
 
