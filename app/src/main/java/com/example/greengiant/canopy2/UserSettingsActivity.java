@@ -1,11 +1,14 @@
 package com.example.greengiant.canopy2;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,6 +25,13 @@ public class UserSettingsActivity extends CustomActivity {
         setContentView(R.layout.user_settings);
 
         new GetUserSettingsTask().execute();
+
+        final Button logoutButton = (Button) findViewById(R.id.logoutBttn);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new LogoutTask().execute();
+            }
+        });
     }
 
     private void setupActivity() {
@@ -76,5 +86,24 @@ public class UserSettingsActivity extends CustomActivity {
             return null;
         }
 
+    }
+
+    private class LogoutTask extends AsyncTask<Void, Void, Void> {
+        protected Void doInBackground(Void... voids) {
+            SharedPreferences settings = getSharedPreferences("user_data", MODE_PRIVATE);
+            SharedPreferences.Editor edit = settings.edit();
+            edit.clear();
+            edit.commit();
+
+            return null;
+        }
+
+        protected void onPostExecute(Void results) {
+            Intent newActivity = new Intent(getApplicationContext(), LoginActivity.class);
+            newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            newActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplicationContext().startActivity(newActivity);
+            finish();
+        }
     }
 }

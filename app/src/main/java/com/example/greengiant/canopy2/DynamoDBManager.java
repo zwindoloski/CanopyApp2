@@ -1,12 +1,24 @@
 package com.example.greengiant.canopy2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapperConfig;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBQueryExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
+import com.amazonaws.services.dynamodbv2.model.Condition;
+import com.amazonaws.services.dynamodbv2.model.ConditionalOperator;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Zack on 2/6/2016.
@@ -96,6 +108,13 @@ public class DynamoDBManager {
         mapper.save(user);
     }
 
+    public static void createUser(User user){
+        AmazonDynamoDBClient ddb = NewUserActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+
+        mapper.save(user);
+    }
+
     public static ArrayList<Schedule> getScheduleList(){
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
@@ -122,5 +141,52 @@ public class DynamoDBManager {
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
 
         return mapper.load(Schedule.class, id);
+    }
+
+    public static boolean validUsername(String username){
+        AmazonDynamoDBClient ddb = NewUserActivity.clientManager.ddb();
+        Condition scanFilterCondition = new Condition()
+                .withComparisonOperator(ComparisonOperator.EQ.toString())
+                .withAttributeValueList(new AttributeValue().withS(username));
+        Map<String, Condition> conditions = new HashMap<String, Condition>();
+        conditions.put("username", scanFilterCondition);
+
+        ScanRequest scanRequest = new ScanRequest()
+                .withTableName("Users")
+                .withScanFilter(conditions);
+
+        ScanResult result = ddb.scan(scanRequest);
+        return (result.getCount()==0);
+    }
+
+    public static boolean loginUser(String username, String password, Context context){
+        AmazonDynamoDBClient ddb = LoginActivity.clientManager.ddb();
+        Condition scanFilterCondition = new Condition()
+                .withComparisonOperator(ComparisonOperator.EQ.toString())
+                .withAttributeValueList(new AttributeValue().withS(username));
+        Condition scanFilterCondition2 = new Condition()
+                .withComparisonOperator(ComparisonOperator.EQ.toString())
+                .withAttributeValueList(new AttributeValue().withS(password));
+        Map<String, Condition> conditions = new HashMap<String, Condition>();
+        conditions.put("username", scanFilterCondition);
+        conditions.put("password", scanFilterCondition2);
+
+        ScanRequest scanRequest = new ScanRequest()
+                .withTableName("Users")
+                .withScanFilter(conditions)
+                .withConditionalOperator(ConditionalOperator.AND);
+
+        ScanResult result = ddb.scan(scanRequest);
+
+        if(result.getCount() == 1){
+            SharedPreferences settings = context.getSharedPreferences("user_data", context.MODE_PRIVATE);
+            SharedPreferences.Editor edit = settings.edit();
+            edit.clear();
+            edit.putString("user_id", result.getItems().get(0).get("id").toString());
+            edit.commit();
+            return true;
+        }else{
+            return false;
+        }
     }
 }
