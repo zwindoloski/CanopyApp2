@@ -35,6 +35,7 @@ public class CreateScheduleActivity extends CustomActivity {
 
         final Spinner shadeModeSpinner = (Spinner) findViewById(R.id.spinnerShadeScheduleMode);
         ArrayAdapter<String> shadeModeAdapter = new ArrayAdapter<String>(CreateScheduleActivity.this, android.R.layout.simple_spinner_item, modes);
+        shadeModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shadeModeSpinner.setAdapter(shadeModeAdapter);
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day_of_week);
         final Button createShadeScheduleButton = (Button) findViewById(R.id.create_shade_schedule_bttn);
