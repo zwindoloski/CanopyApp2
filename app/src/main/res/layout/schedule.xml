@@ -8,10 +8,10 @@
         android:id="@+id/textViewScheduleName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:text="Updat Schedule Item"/>
 
     <ScrollView
         android:layout_width="fill_parent"

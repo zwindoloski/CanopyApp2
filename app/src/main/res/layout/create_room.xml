@@ -5,6 +5,7 @@
     android:layout_height="fill_parent">
 
     <TextView
+        android:id="@+id/create_new_room"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/create_new_room"
@@ -55,6 +56,13 @@
             android:entries="@array/room_run_mode"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/view_schedule_bttn"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="@string/view_schedule"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/newRoomCreateBttn"

@@ -123,6 +123,24 @@ public class DynamoDBManager {
         mapper.save(user);
     }
 
+    public static ArrayList<Schedule> getSchedules(String source, String type){
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+//        scanExpression.addExpressionAttributeNamesEntry("", source);
+
+        PaginatedScanList<Schedule> result = mapper.scan(
+                Schedule.class, scanExpression);
+        ArrayList<Schedule> resultList = new ArrayList<>();
+        for (Schedule schedule : result) {
+            if(schedule.getItem_type().compareToIgnoreCase(type) == 0 && schedule.getItem_id().compareToIgnoreCase(source) == 0) {
+                resultList.add(schedule);
+                System.out.println(schedule);
+            }
+        }
+        return resultList;
+    }
+
     public static ArrayList<Schedule> getScheduleList(){
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);

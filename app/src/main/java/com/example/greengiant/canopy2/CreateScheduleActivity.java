@@ -1,56 +1,73 @@
 package com.example.greengiant.canopy2;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.annotation.TargetApi;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 
 /**
  * Created by Zachary on 2/20/2016.
  */
 public class CreateScheduleActivity extends CustomActivity {
-    int SHADE_SCHED = 0;
-    int ROOM_SCHED = 1;
-    int USER_SCHED = 2;
+    Schedule schedule;
+    String itemId;
+    String itemType;
+    String[] modes;
 
     @Override
-    public void onCreate (Bundle savedInstanceState){
-
+    public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_schedule);
 
-        final Button shadeScheduleButton = (Button) findViewById(R.id.shadeScheduleBttn);
-        shadeScheduleButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                CreateScheduleActivity.this.startActivityForResult(new Intent(CreateScheduleActivity.this, CreateShadeScheduleActivity.class), SHADE_SCHED);
-            }
-        });
+        itemId = getIntent().getExtras().getString("ITEM_ID");
+        itemType = getIntent().getExtras().getString("ITEM_TYPE");
+        modes = getIntent().getExtras().getStringArray("MODES");
 
-        final Button roomScheduleButton = (Button) findViewById(R.id.roomScheduleBttn);
-        roomScheduleButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                CreateScheduleActivity.this.startActivityForResult(new Intent(CreateScheduleActivity.this, CreateRoomScheduleActivity.class), ROOM_SCHED);
-            }
-        });
+        setupActivity();
+    }
 
-        final Button userScheduleButton = (Button) findViewById(R.id.homeScheduleBttn);
-        userScheduleButton.setOnClickListener(new View.OnClickListener() {
+    public void setupActivity() {
+
+        final Spinner shadeModeSpinner = (Spinner) findViewById(R.id.spinnerShadeScheduleMode);
+        ArrayAdapter<String> shadeModeAdapter = new ArrayAdapter<String>(CreateScheduleActivity.this, android.R.layout.simple_spinner_item, modes);
+        shadeModeSpinner.setAdapter(shadeModeAdapter);
+        final Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day_of_week);
+        final Button createShadeScheduleButton = (Button) findViewById(R.id.create_shade_schedule_bttn);
+        final TimePicker timePicker = (TimePicker) findViewById(R.id.schedule_time_picker);
+
+        createShadeScheduleButton.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.M)
             public void onClick(View v) {
-                CreateScheduleActivity.this.startActivityForResult(new Intent(CreateScheduleActivity.this, CreateHomeScheduleActivity.class), USER_SCHED);
+                int dayNumber  = daySpinner.getSelectedItemPosition();
+                int time = dayNumber*10000 + AppUtils.getHour(timePicker)*100 + AppUtils.getMinute(timePicker);
+
+                schedule = new Schedule();
+                schedule.setDay(daySpinner.getSelectedItem().toString());
+                schedule.setRun_mode(shadeModeSpinner.getSelectedItem().toString());
+                schedule.setItem_type(itemType);
+                schedule.setItem_id(itemId);
+                schedule.setStart_time(time);
+                new CreateScheduleTask().execute();
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (resultCode == RESULT_OK) {
-            Toast.makeText(getApplicationContext(), "Your schedule has been successfully created", Toast.LENGTH_LONG).show();
+    private class CreateScheduleTask extends AsyncTask<Void, Void, Void> {
+
+        protected Void doInBackground(Void... voids){
+            DynamoDBManager.updateSchedule(schedule);
+            return null;
         }
-        else {
-            Toast.makeText(getApplicationContext(), "We were unable to create your schedule", Toast.LENGTH_LONG).show();
+
+        protected void onPostExecute(Void results) {
+            super.onPostExecute(results);
+            setResult(RESULT_OK);
+            finish();
         }
-        finish();
     }
 }

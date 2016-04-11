@@ -27,29 +27,17 @@
             <com.jjoe64.graphview.GraphView
                 android:layout_width="match_parent"
                 android:layout_height="200dip"
-                android:id="@+id/sunlightGraph"
+                android:id="@+id/scheduleGraph"
                 android:layout_marginBottom="10dp" />
 
-            <LinearLayout
+            <Button
+                android:id="@+id/addScheduleBttn"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_schedule_item"/>
 
-                <TextView
-                    android:id="@+id/granularityTextView"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sunlight_granularity"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_weight="0.6"/>
-
-                <Spinner
-                    android:id="@+id/spinnerGranularity"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:entries="@array/sunlight_granularity"/>
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

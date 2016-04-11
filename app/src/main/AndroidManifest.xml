@@ -30,8 +30,6 @@
             android:configChanges="orientation|keyboardHidden"/>
         <activity android:name="ScheduleActivity"
             android:configChanges="orientation"/>
-        <activity android:name="ScheduleListActivity"
-            android:configChanges="orientation|keyboardHidden"/>
         <activity android:name="ShadeActivity"
             android:configChanges="orientation|keyboardHidden"/>
         <activity android:name="RoomListActivity"
@@ -44,19 +42,15 @@
             android:configChanges="orientation"/>
         <activity android:name="UserSettingsActivity"
             android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name="CreateScheduleActivity"
-            android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name="CreateShadeScheduleActivity"
-            android:configChanges="orientation"/>
-        <activity android:name="CreateRoomScheduleActivity"
-            android:configChanges="orientation"/>
-        <activity android:name="CreateHomeScheduleActivity"
+        <activity android:name=".CreateScheduleActivity"
             android:configChanges="orientation"/>
         <activity android:name="ConnectNestAccountActivity"
             android:configChanges="orientation"/>
         <activity android:name="ConnectShadeActivity"
             android:configChanges="orientation"/>
         <activity android:name="SunlightGraphActivity"
+            android:configChanges="orientation"/>
+        <activity android:name=".ScheduleGraphActivity"
             android:configChanges="orientation"/>
     </application>
 

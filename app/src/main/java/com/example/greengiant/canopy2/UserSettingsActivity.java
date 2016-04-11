@@ -1,6 +1,5 @@
 package com.example.greengiant.canopy2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -63,6 +62,18 @@ public class UserSettingsActivity extends CustomActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //do nothing
+            }
+        });
+
+        final Button viewScheduleButton = (Button) findViewById(R.id.view_schedule_bttn);
+        viewScheduleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(UserSettingsActivity.this, ScheduleGraphActivity.class);
+                intent.putExtra("ITEM_TYPE", "User");
+                intent.putExtra("ITEM_ID", user.getId());
+                intent.putExtra("ITEM_NAME", user.getUsername());
+                intent.putExtra("MODES", getResources().getStringArray(R.array.user_run_mode));
+                UserSettingsActivity.this.startActivity(intent);
             }
         });
     }

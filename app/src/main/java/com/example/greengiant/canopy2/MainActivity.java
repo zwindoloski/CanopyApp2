@@ -56,20 +56,6 @@ public class MainActivity extends CustomActivity{
             }
         });
 
-        final Button listScheduleButton = (Button) findViewById(R.id.list_schedule_bttn);
-        listScheduleButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick( View v){
-                new DynamoDBManagerTask().execute(DynamoDBManagerType.LIST_SCHEDULES);
-            }
-        });
-
-        final Button addScheduleButton = (Button) findViewById(R.id.add_schedule_bttn);
-        addScheduleButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick( View v){
-                new DynamoDBManagerTask().execute(DynamoDBManagerType.ADD_SCHEDULE);
-            }
-        });
-
         final Button connectNestAccountButton = (Button) findViewById(R.id.connect_nest_account_bttn);
         connectNestAccountButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -107,9 +93,6 @@ public class MainActivity extends CustomActivity{
             else if (result.getTaskType() == DynamoDBManagerType.LIST_ROOMS){
                 startActivity(new Intent(MainActivity.this, RoomListActivity.class));
             }
-            else if (result.getTaskType() == DynamoDBManagerType.LIST_SCHEDULES){
-                startActivity(new Intent(MainActivity.this, ScheduleListActivity.class));
-            }
             else if (result.getTaskType() == DynamoDBManagerType.USER_SETTINGS){
                 startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
             }
@@ -119,16 +102,13 @@ public class MainActivity extends CustomActivity{
             else if (result.getTaskType() == DynamoDBManagerType.CREATE_SHADE){
                 startActivity(new Intent(MainActivity.this, CreateShadeActivity.class));
             }
-            else if (result.getTaskType() == DynamoDBManagerType.ADD_SCHEDULE){
-                startActivity(new Intent(MainActivity.this,CreateScheduleActivity.class));
-            }
             else if(result.getTaskType() == DynamoDBManagerType.CONNECT_NEST_ACCOUNT){
                 startActivity(new Intent(MainActivity.this,ConnectNestAccountActivity.class));
             }
         }
     }
     private enum DynamoDBManagerType {
-        LIST_SHADES, LIST_ROOMS,LIST_SCHEDULES, USER_SETTINGS, CREATE_ROOM, CREATE_SHADE, ADD_SCHEDULE, CONNECT_NEST_ACCOUNT
+        LIST_SHADES, LIST_ROOMS,LIST_SCHEDULES, USER_SETTINGS, CREATE_ROOM, CREATE_SHADE, CONNECT_NEST_ACCOUNT
     }
 
     private class DynamoDBManagerTaskResult {

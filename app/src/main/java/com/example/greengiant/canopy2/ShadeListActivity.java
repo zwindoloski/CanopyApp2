@@ -27,6 +27,12 @@ public class ShadeListActivity extends CustomListActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        new GetShadeListTask().execute();
+    }
+
+    @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
         Intent intent = new Intent(ShadeListActivity.this, ShadeActivity.class);
         intent.putExtra("SHADE_ID", items.get(position).getId() + "");
