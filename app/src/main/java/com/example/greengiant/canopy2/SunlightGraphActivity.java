@@ -16,6 +16,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +28,7 @@ public class SunlightGraphActivity extends CustomActivity {
 
     private String shadeId;
     private Shade shade;
+    private Date maxDate = new Date(0);
     private Date[] sunlightDates;
     private int[] sunlightValues;
     private DataPoint[] sunlightDataPoints;
@@ -39,27 +41,27 @@ public class SunlightGraphActivity extends CustomActivity {
         setContentView(R.layout.sunlight_graph);
 
         //**** temp data to mock dates
-        DateFormat iso8601 = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
+//        DateFormat iso8601 = new SimpleDateFormat("yyyyMMddHHmmss");
+//        Date date = new Date();
+//
+//        try {
+//            date = iso8601.parse("20160329221623");
+//        }catch(java.text.ParseException e){
+//            System.out.println(e);
+//        }
+//
+//        System.out.println(date);
 
-        try {
-            date = iso8601.parse("20160329221623");
-        }catch(java.text.ParseException e){
-            System.out.println(e);
-        }
-
-        System.out.println(date);
-
-        int size = 365*24*4;
-        Random r = new Random();
-        sunlightDates = new Date[size];
-        sunlightValues = new int[size];
-        for (int i = 0; i < size; i++) {
-            sunlightDates[i] = (Date) date.clone();
-//            sunlightValues[i] = 512 + (512*date.getMonth()/12)*(date.getHours()-12)/12; //r.nextInt(1024);
-            sunlightValues[i] = (int)(256*Math.sin(2*3.14*date.getHours()/24)+256*(date.getMonth()*30+date.getDay())/365) + 512;
-            date.setTime(date.getTime() + 900000);
-        }
+//        int size = 365*24*4;
+//        Random r = new Random();
+//        sunlightDates = new Date[size];
+//        sunlightValues = new int[size];
+//        for (int i = 0; i < size; i++) {
+//            sunlightDates[i] = (Date) date.clone();
+////            sunlightValues[i] = 512 + (512*date.getMonth()/12)*(date.getHours()-12)/12; //r.nextInt(1024);
+//            sunlightValues[i] = (int)(256*Math.sin(2*3.14*date.getHours()/24)+256*(date.getMonth()*30+date.getDay())/365) + 512;
+//            date.setTime(date.getTime() + 900000);
+//        }
         //****
 
         shadeId = getIntent().getExtras().getString("SHADE_ID");
@@ -74,26 +76,57 @@ public class SunlightGraphActivity extends CustomActivity {
 
         new UpdateGranularityTask().execute(new Integer[] {0});
 
-        spinnerGranularity = (Spinner) findViewById(R.id.spinnerGranularity);
-
-        spinnerGranularity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                new UpdateGranularityTask().execute(new Integer[] {position});
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                //do nothing
-            }
-        });
+//        spinnerGranularity = (Spinner) findViewById(R.id.spinnerGranularity);
+//
+//        spinnerGranularity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                new UpdateGranularityTask().execute(new Integer[] {position});
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                //do nothing
+//            }
+//        });
     }
-
 
     private class GetShadeTask extends AsyncTask<Void, Void, Void> {
 
         protected Void doInBackground(Void... voids){
             shade = DynamoDBManager.getShade(shadeId);
+
+            VoltageHeap voltageReadings = DynamoDBManager.getVoltageReadings(shade.getId());
+            DateFormat iso8601 = new SimpleDateFormat("yyyyMMddHHmmss");
+
+            int size = voltageReadings.size();
+            sunlightDates = new Date[size];
+            sunlightValues = new int[size];
+
+            maxDate.setTime(0);
+
+            VoltageReading vr;
+            for(int i=0; i<size; i++){
+                vr = voltageReadings.remove();
+
+                System.out.println(vr.getId()+" "+vr.getShade_id()+" "+vr.getVoltage()+" "+vr.getTimestamp());
+
+                Date date = new Date();
+                try {
+                    date = iso8601.parse(vr.getTimestamp());
+                } catch (java.text.ParseException e) {
+                    System.out.println(e);
+                }
+
+                System.out.println(date);
+
+                sunlightDates[i] = date;
+                sunlightValues[i] = vr.getVoltage();
+
+                if(date.after(maxDate))
+                    maxDate.setTime(date.getTime());
+            }
+
             return null;
         }
 
@@ -114,7 +147,7 @@ public class SunlightGraphActivity extends CustomActivity {
                     sunlightDataPoints[i] = new DataPoint(sunlightDates[i], sunlightValues[i]);
                 }
             }else{
-                int days = sunlightDates.length/96;
+                int days = 1 + sunlightDates.length/96;
                 sunlightDataPoints = new DataPoint[days];
 
                 int currentDate = 0;
@@ -147,37 +180,34 @@ public class SunlightGraphActivity extends CustomActivity {
             graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(SunlightGraphActivity.this));
 
             double min = 0.0;
-            double max = sunlightDataPoints[sunlightDataPoints.length-1].getX();
             int horizontalLabels = 2;
 
             switch (spinnerGranularity.getSelectedItemPosition()){
                 case(0): {
                     long offset = 86400000;
-                    if (sunlightDates.length > 96)
-                        min = max - offset;
-                    else {
-                        min = sunlightDataPoints[0].getX();
-                        max = offset;
-                    }
+                    min = maxDate.getTime() - offset;
                     horizontalLabels = 6;
+
+                    for(int i=0;i<sunlightDataPoints.length;i++){
+                        System.out.println(sunlightDataPoints[i]+" "+sunlightDates[i]);
+                    }
 
                     graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                         @Override
                         public String formatLabel(double value, boolean isValueX) {
-                            if (isValueX) {
-                                // show normal x values
-                                String label = super.formatLabel(value, isValueX);
+                        if (isValueX) {
+                            // show normal x values
+                            String label = super.formatLabel(value, isValueX);
+                            DateFormat formatter = new SimpleDateFormat("h a");
+                            long milliSeconds = Long.valueOf(label.replaceAll(",", "").toString());
+                            Date d = new Date(milliSeconds);
+                            formatter.format(d.getTime());
 
-                                DateFormat formatter = new SimpleDateFormat("h a");
-                                long milliSeconds = Long.valueOf(label.replaceAll(",", "").toString());
-                                Date d = new Date(milliSeconds);
-                                formatter.format(d.getTime());
-
-                                return formatter.format(d.getTime());
-                            } else {
-                                // show default for y values
-                                return super.formatLabel(value, isValueX);
-                            }
+                            return formatter.format(d.getTime());
+                        } else {
+                            // show default for y values
+                            return super.formatLabel(value, isValueX);
+                        }
                         }
                     });
 
@@ -185,23 +215,13 @@ public class SunlightGraphActivity extends CustomActivity {
                 }
                 case(1): {
                     long offset = 604800000;
-                    if (sunlightDates.length > 672)
-                        min = max - offset;
-                    else {
-                        min = sunlightDataPoints[0].getX();
-                        max = offset;
-                    }
+                    min = maxDate.getTime() - offset;
                     horizontalLabels = 4;
                     break;
                 }
                 case(2): {
                     long offset = 2592000000L;
-                    if (sunlightDates.length > 2880)
-                        min = max - offset;
-                    else {
-                        min = sunlightDataPoints[0].getX();
-                        max = offset;
-                    }
+                    min = maxDate.getTime() - offset;
                     horizontalLabels = 4;
                     break;
                 }
@@ -209,7 +229,7 @@ public class SunlightGraphActivity extends CustomActivity {
 
             graph.getViewport().setXAxisBoundsManual(true);
             graph.getViewport().setMinX(min);
-            graph.getViewport().setMaxX(max);
+            graph.getViewport().setMaxX(maxDate.getTime());
             graph.getGridLabelRenderer().setNumHorizontalLabels(horizontalLabels);
 
             graph.getViewport().setYAxisBoundsManual(true);

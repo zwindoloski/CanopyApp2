@@ -34,8 +34,8 @@
 
     <string name="view_schedule">View Schedule</string>
 
-    <string name="select_network">Select Your Network</string>
-    <string name="network_password">Network Password</string>
+    <string name="select_network">Network</string>
+    <string name="network_password">Password</string>
     <string name="network_password_hint">Network Password</string>
     <string name="enter_shade_id">Enter the Shade ID\n(Found on the Device)</string>
     <string name="connect">Connect</string>
@@ -43,7 +43,7 @@
     <string name="serial_number">Serial Number</string>
     <string name="shade_serial_hint">Found on Device</string>
 
-    <string name="select_room">Select Room</string>
+    <string name="select_room">Room</string>
     <string name="run_mode">Run Mode</string>
     <string name="add_schedule">Add Schedule</string>
     <string name="add_schedule_item">Add Schedule Item</string>
@@ -59,7 +59,7 @@
     <string name="bank_schedule_name_error">Schedule Name cannot be blank.</string>
     <string name="home">Home</string>
     <string name="connect_nest_account">Connect To Nest</string>
-    <string name="select_thermostat">Select Thermostat</string>
+    <string name="select_thermostat">Thermostat</string>
     <string name="view_schedules">View All Schedules</string>
     <string name="update">Update</string>
     <string name="update_shade">Update Shade</string>

@@ -123,6 +123,23 @@ public class DynamoDBManager {
         mapper.save(user);
     }
 
+    public static VoltageHeap getVoltageReadings(String shade_id){
+        AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
+        DynamoDBMapper mapper = new DynamoDBMapper(ddb);
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+//        scanExpression.addExpressionAttributeNamesEntry("", source);
+
+        PaginatedScanList<VoltageReading> result = mapper.scan(
+                VoltageReading.class, scanExpression);
+        VoltageHeap resultList = new VoltageHeap();
+        for (VoltageReading vr : result) {
+            if(vr.getShade_id().compareToIgnoreCase(shade_id) == 0) {
+                resultList.insert(vr);
+            }
+        }
+        return resultList;
+    }
+
     public static ArrayList<Schedule> getSchedules(String source, String type){
         AmazonDynamoDBClient ddb = MainActivity.clientManager.ddb();
         DynamoDBMapper mapper = new DynamoDBMapper(ddb);
@@ -135,9 +152,11 @@ public class DynamoDBManager {
         for (Schedule schedule : result) {
             if(schedule.getItem_type().compareToIgnoreCase(type) == 0 && schedule.getItem_id().compareToIgnoreCase(source) == 0) {
                 resultList.add(schedule);
-                System.out.println(schedule);
             }
         }
+
+
+
         return resultList;
     }
 

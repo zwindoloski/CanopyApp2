@@ -74,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/start_time"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_weight="0.6"/>
+                    android:layout_weight="0.6"
+                    android:layout_gravity="center_vertical" />
                 <TimePicker
                     android:id="@+id/schedule_update_time_picker"
                     android:layout_width="wrap_content"
