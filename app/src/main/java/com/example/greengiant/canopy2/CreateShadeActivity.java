@@ -245,8 +245,11 @@ public class CreateShadeActivity extends CustomActivity {
         for(Thermostat t : thermostats){
             ThermostatSpinnerObject tso = new ThermostatSpinnerObject(t.getName(), t.getDeviceId());
             thermostatObjects.add(tso);
-            if(shade.getId().compareToIgnoreCase(tso.getId()) == 0)
-                currentThermostat = tso;
+
+            if(!isNew) {
+                if (shade.getId().compareToIgnoreCase(tso.getId()) == 0)
+                    currentThermostat = tso;
+            }
         }
 
         thermostatAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,thermostatObjects );
