@@ -168,8 +168,8 @@ public class ScheduleGraphActivity extends CustomActivity {
             closedSeries = new PointsGraphSeries<DataPoint>(closedDataPoints.toArray(new DataPoint[0]));
             userSeries = new PointsGraphSeries<DataPoint>(userDataPoints.toArray(new DataPoint[0]));
             roomSeries = new PointsGraphSeries<DataPoint>(roomDataPoints.toArray(new DataPoint[0]));
-            preservationSeries = new PointsGraphSeries<DataPoint>(userDataPoints.toArray(new DataPoint[0]));
-            convenienceSeries = new PointsGraphSeries<DataPoint>(roomDataPoints.toArray(new DataPoint[0]));
+            preservationSeries = new PointsGraphSeries<DataPoint>(preservationDataPoints.toArray(new DataPoint[0]));
+            convenienceSeries = new PointsGraphSeries<DataPoint>(convenienceDataPoints.toArray(new DataPoint[0]));
 
             setShape(manualSeries, R.drawable.manual);
             setShape(energySeries, R.drawable.leaf);
