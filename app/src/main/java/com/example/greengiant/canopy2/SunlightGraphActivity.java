@@ -17,8 +17,10 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -97,7 +99,7 @@ public class SunlightGraphActivity extends CustomActivity {
             shade = DynamoDBManager.getShade(shadeId);
 
             VoltageHeap voltageReadings = DynamoDBManager.getVoltageReadings(shade.getId());
-            DateFormat iso8601 = new SimpleDateFormat("yyyyMMddHHmmss");
+            DateFormat iso8601 = new SimpleDateFormat("yyyyMMddHHmmss Z");
 
             int size = voltageReadings.size();
             sunlightDates = new Date[size];
@@ -109,11 +111,12 @@ public class SunlightGraphActivity extends CustomActivity {
             for(int i=0; i<size; i++){
                 vr = voltageReadings.remove();
 
-                System.out.println(vr.getId()+" "+vr.getShade_id()+" "+vr.getVoltage()+" "+vr.getTimestamp());
+                System.out.println(vr.getId() + " " + vr.getShade_id() + " " + vr.getVoltage() + " " + vr.getTimestamp());
 
                 Date date = new Date();
+
                 try {
-                    date = iso8601.parse(vr.getTimestamp());
+                    date = iso8601.parse(vr.getTimestamp() + " UTC");
                 } catch (java.text.ParseException e) {
                     System.out.println(e);
                 }
@@ -123,8 +126,21 @@ public class SunlightGraphActivity extends CustomActivity {
                 sunlightDates[i] = date;
                 sunlightValues[i] = vr.getVoltage();
 
-                if(date.after(maxDate))
+                if(date.after(maxDate)) {
                     maxDate.setTime(date.getTime());
+                    
+                    if(maxDate.getMinutes() < 15)
+                        maxDate.setMinutes(15);
+                    else if(maxDate.getMinutes() < 30)
+                        maxDate.setMinutes(30);
+                    else if(maxDate.getMinutes() < 45)
+                        maxDate.setMinutes(45);
+                    else {
+                        maxDate.setHours(maxDate.getHours()+1);
+                        maxDate.setMinutes(0);
+                    }
+                    maxDate.setSeconds(0);
+                }
             }
 
             return null;
@@ -183,10 +199,11 @@ public class SunlightGraphActivity extends CustomActivity {
             int horizontalLabels = 2;
 
 //            switch (spinnerGranularity.getSelectedItemPosition()){
-//                case(0): {
-                    long offset = 86400000;
+////                case(0): {
+//                    long offset = 86400000;
+                    long offset = 3600000;
                     min = maxDate.getTime() - offset;
-                    horizontalLabels = 6;
+                    horizontalLabels = 5;
 
                     for(int i=0;i<sunlightDataPoints.length;i++){
                         System.out.println(sunlightDataPoints[i]+" "+sunlightDates[i]);
@@ -198,12 +215,19 @@ public class SunlightGraphActivity extends CustomActivity {
                         if (isValueX) {
                             // show normal x values
                             String label = super.formatLabel(value, isValueX);
-                            DateFormat formatter = new SimpleDateFormat("h a");
+                            DateFormat formatter = new SimpleDateFormat("h:mm a");
                             long milliSeconds = Long.valueOf(label.replaceAll(",", "").toString());
-                            Date d = new Date(milliSeconds);
-                            formatter.format(d.getTime());
 
-                            return formatter.format(d.getTime());
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+                            calendar.setTimeInMillis(milliSeconds);
+
+
+//                            Date d = new Date(milliSeconds);
+//                            System.out.println(d);
+//                            formatter.format(d.getTime());
+
+                            return formatter.format(calendar.getTimeInMillis());
                         } else {
                             // show default for y values
                             return super.formatLabel(value, isValueX);
