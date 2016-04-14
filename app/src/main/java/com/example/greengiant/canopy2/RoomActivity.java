@@ -1,11 +1,12 @@
 package com.example.greengiant.canopy2;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -55,6 +56,18 @@ public class RoomActivity extends CustomActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //do nothing
+            }
+        });
+
+        final Button viewScheduleButton = (Button) findViewById(R.id.view_schedule_bttn);
+        viewScheduleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(RoomActivity.this, ScheduleGraphActivity.class);
+                intent.putExtra("ITEM_TYPE", "Room");
+                intent.putExtra("ITEM_ID", room.getId());
+                intent.putExtra("ITEM_NAME", room.getName());
+                intent.putExtra("MODES", R.array.room_run_mode);
+                RoomActivity.this.startActivity(intent);
             }
         });
 

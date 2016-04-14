@@ -1,6 +1,5 @@
 package com.example.greengiant.canopy2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.res.Resources;
 import android.widget.Toast;
-
-import com.amazonaws.auth.policy.Resource;
 
 /**
  * Created by Zack on 2/7/2016.
@@ -32,6 +29,18 @@ public class ShadeActivity extends CustomActivity {
         setContentView(R.layout.shade);
 
         shadeId = getIntent().getExtras().getString("SHADE_ID");
+        new GetShadeTask().execute();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(shade != null) {
+            if (shade.isOverriding())
+                overrideLayout.setVisibility(View.VISIBLE);
+            else
+                overrideLayout.setVisibility(View.GONE);
+        }
         new GetShadeTask().execute();
     }
 
@@ -80,6 +89,8 @@ public class ShadeActivity extends CustomActivity {
         overrideLayout = (LinearLayout) findViewById(R.id.override_layout);
         if(shade.isOverriding())
             overrideLayout.setVisibility(View.VISIBLE);
+        else
+            overrideLayout.setVisibility(View.GONE);
 
         spinnerRunMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -90,6 +101,36 @@ public class ShadeActivity extends CustomActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //do nothing
+            }
+        });
+
+        final Button updateShadeButton = (Button) findViewById(R.id.update_shade_bttn);
+        updateShadeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ShadeActivity.this, CreateShadeActivity.class);
+                intent.putExtra("SHADE_ID", shade.getId());
+                ShadeActivity.this.startActivity(intent);
+            }
+        });
+
+        final Button viewScheduleButton = (Button) findViewById(R.id.view_schedule_bttn);
+        viewScheduleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ShadeActivity.this, ScheduleGraphActivity.class);
+                intent.putExtra("ITEM_TYPE", "Shade");
+                intent.putExtra("ITEM_ID", shade.getId());
+                intent.putExtra("ITEM_NAME", shade.getName());
+                intent.putExtra("MODES", getResources().getStringArray(R.array.shade_run_mode));
+                ShadeActivity.this.startActivity(intent);
+            }
+        });
+
+        final Button viewSunlightButton = (Button) findViewById(R.id.view_sunlight_bttn);
+        viewSunlightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ShadeActivity.this, SunlightGraphActivity.class);
+                intent.putExtra("SHADE_ID", shade.getId());
+                ShadeActivity.this.startActivity(intent);
             }
         });
 

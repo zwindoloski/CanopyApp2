@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import java.sql.Time;
 public class ScheduleActivity extends CustomActivity {
     private String scheduleId = "";
     private Schedule schedule = null;
+    String[] modes;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,15 +32,25 @@ public class ScheduleActivity extends CustomActivity {
         setContentView(R.layout.schedule);
 
         scheduleId = getIntent().getExtras().getString("SCHEDULE_ID");
+        modes = getIntent().getExtras().getStringArray("MODES");
+
+        System.out.println(modes[0]);
         new GetScheduleTask().execute();
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     private void setupActivity() {
-        final String scheduleName = schedule.getName();
+//        final String scheduleName = schedule.getName();
 
-        final TextView textViewScheduleName = (TextView) findViewById(R.id.textViewScheduleName);
-        textViewScheduleName.setText(scheduleName);
+//        final TextView textViewScheduleName = (TextView) findViewById(R.id.textViewScheduleName);
+//        textViewScheduleName.setText(scheduleName);
+
+        final Spinner shadeModeSpinner = (Spinner) findViewById(R.id.spinnerScheduleMode);
+        ArrayAdapter<String> shadeModeAdapter = new ArrayAdapter<>(ScheduleActivity.this, android.R.layout.simple_spinner_item, modes);
+        shadeModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        shadeModeSpinner.setAdapter(shadeModeAdapter);
+
+        shadeModeSpinner.setSelection(shadeModeAdapter.getPosition(schedule.getRun_mode()));
 
         final Spinner spinnerDayPosition = (Spinner) findViewById(R.id.spinnerDayOfWeek);
         if (schedule.getDay() != null) {
@@ -105,9 +117,10 @@ public class ScheduleActivity extends CustomActivity {
 
         protected void onPostExecute(Void results) {
             super.onPostExecute(results);
-            Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplicationContext().startActivity(intent);
+//            Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            getApplicationContext().startActivity(intent);
+            finish();
         }
 
 

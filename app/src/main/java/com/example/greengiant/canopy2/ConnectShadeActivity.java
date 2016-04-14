@@ -189,7 +189,7 @@ public class ConnectShadeActivity extends CustomActivity{
             connectedToShade = false;
             myWifiManager.enableNetwork(id, true);
 
-            System.out.println("connecting");
+            System.out.println("connecting "+deviceWifiConfig.SSID);
             //wait until connected
             while(!connectedToShade);
             System.out.println("connected");

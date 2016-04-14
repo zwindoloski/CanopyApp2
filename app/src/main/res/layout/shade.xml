@@ -125,10 +125,29 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/view_sunlight_bttn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/view_sunlight_graph"/>
+
+                <Button
+                    android:id="@+id/view_schedule_bttn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/view_schedule"/>
+
+                <Button
                     android:id="@+id/connect_shade_bttn"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:text="@string/edit_connection"/>
+
+
+                <Button
+                    android:id="@+id/update_shade_bttn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/update_shade"/>
 
             </LinearLayout>
         </LinearLayout>

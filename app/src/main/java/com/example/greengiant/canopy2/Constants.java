@@ -4,6 +4,9 @@ package com.example.greengiant.canopy2;
  * Created by Zack on 2/6/2016.
  */
 public class Constants {
+    public static final int SHADE_SCHED = 0;
+    public static final int ROOM_SCHED = 1;
+    public static final int USER_SCHED = 2;
 
     //TODO let the user log in and store this value somehow
     public static final String USER_ID = "10";

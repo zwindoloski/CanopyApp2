@@ -34,6 +34,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/view_schedule_bttn"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="@string/view_schedule"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

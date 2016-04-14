@@ -19,8 +19,23 @@
     <string name="blank_shade_name_error_toast">Shade Name cannot be blank.</string>
     <string name="blank_shade_serial_error_toast">Shade Serial Number cannot be blank.</string>
 
-    <string name="select_network">Select Your Network</string>
-    <string name="network_password">Network Password</string>
+    <string name="view_sunlight_graph">View Sunlight Graph</string>
+    <string name="sunlight_graph">Recorded Light Levels</string>
+    <string name="sunlight_granularity">Show data by</string>
+    <string name="by_day">Day</string>
+    <string name="by_week">Week</string>
+    <string name="by_month">Month</string>
+    <string name="by_year">Year</string>
+    <string-array name="sunlight_granularity">
+        <item>@string/by_day</item>
+        <item>@string/by_week</item>
+        <item>@string/by_month</item>
+    </string-array>
+
+    <string name="view_schedule">View Schedule</string>
+
+    <string name="select_network">Network</string>
+    <string name="network_password">Password</string>
     <string name="network_password_hint">Network Password</string>
     <string name="enter_shade_id">Enter the Shade ID\n(Found on the Device)</string>
     <string name="connect">Connect</string>
@@ -28,9 +43,10 @@
     <string name="serial_number">Serial Number</string>
     <string name="shade_serial_hint">Found on Device</string>
 
-    <string name="select_room">Select Room</string>
+    <string name="select_room">Room</string>
     <string name="run_mode">Run Mode</string>
     <string name="add_schedule">Add Schedule</string>
+    <string name="add_schedule_item">Add Schedule Item</string>
     <string name="shade">Shade</string>
     <string name="user">User</string>
     <string name="room">Room</string>
@@ -43,9 +59,10 @@
     <string name="bank_schedule_name_error">Schedule Name cannot be blank.</string>
     <string name="home">Home</string>
     <string name="connect_nest_account">Connect To Nest</string>
-    <string name="select_thermostat">Select Thermostat</string>
+    <string name="select_thermostat">Thermostat</string>
     <string name="view_schedules">View All Schedules</string>
     <string name="update">Update</string>
+    <string name="update_shade">Update Shade</string>
     <string name="overriding">This shade has been manually overridden.</string>
     <string name="cancel_override">Cancel Manual Override</string>
 
@@ -54,6 +71,10 @@
     <string name="schedule_mode">Schedule</string>
     <string name="open_mode">Open</string>
     <string name="closed_mode">Closed</string>
+    <string name="preservation_mode">Preservation</string>
+    <string name="convenience_mode">Convenience</string>
+
+
     <string name="user_mode">Home</string>
     <string name="room_mode">Room</string>
     <string name="username">Username</string>
@@ -70,6 +91,8 @@
     <string-array name="shade_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/schedule_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
@@ -80,6 +103,8 @@
     <string-array name="room_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/schedule_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
@@ -89,6 +114,8 @@
     <string-array name="user_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/schedule_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
@@ -97,6 +124,8 @@
     <string-array name="schedule_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
     </string-array>

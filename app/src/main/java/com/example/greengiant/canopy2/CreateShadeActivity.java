@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nestlabs.sdk.GlobalUpdate;
@@ -23,13 +24,18 @@ import com.nestlabs.sdk.NestListener;
 import com.nestlabs.sdk.Thermostat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Zack on 2/14/2016. Used to create a new shade
  */
 public class CreateShadeActivity extends CustomActivity {
-    Shade shade = new Shade();
+    boolean isNew = false;
+    Shade shade;
     ArrayList<Room> rooms = null;
+
+    ThermostatSpinnerObject currentThermostat;
+    Room currentRoom;
 
     Spinner thermostatSpinner;
     ArrayAdapter<ThermostatSpinnerObject> thermostatAdapter;
@@ -40,8 +46,8 @@ public class CreateShadeActivity extends CustomActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.create_shade);
 
         //setup nest for thermostats
@@ -77,6 +83,21 @@ public class CreateShadeActivity extends CustomActivity {
         final EditText shadeNameET = (EditText) findViewById(R.id.create_shade_edit_text);
         final EditText shadeSerialET = (EditText) findViewById(R.id.create_shade_serial_edit_text);
         final Button createShadeButton = (Button) findViewById(R.id.new_shade_create_bttn);
+
+        if(!isNew){
+            final TextView textViewShadeName = (TextView) findViewById(R.id.create_new_shade);
+            textViewShadeName.setText(shade.getName());
+
+            if(currentRoom != null)
+                roomSpinner.setSelection(roomArrayAdapter.getPosition(currentRoom));
+            if(currentThermostat != null)
+                thermostatSpinner.setSelection(thermostatAdapter.getPosition(currentThermostat));
+            modeSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.shade_run_mode)).indexOf(shade.getRun_mode()));
+            shadeNameET.setText(shade.getName());
+            shadeSerialET.setText(shade.getDevice_serial_number());
+            createShadeButton.setText("Update");
+        }
+
         createShadeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String shadeName = shadeNameET.getText().toString();
@@ -89,15 +110,15 @@ public class CreateShadeActivity extends CustomActivity {
                     t.show();
                 } else {
                     shade.setDevice_serial_number(shadeSerial);
-                    shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
+                    if(roomSpinner.getSelectedItemPosition() != -1)
+                        shade.setRoom_id(roomArrayAdapter.getItem(roomSpinner.getSelectedItemPosition()).getId());
                     shade.setName(shadeName);
                     SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
                     String user_id = settings.getString("user_id", "");
                     shade.setUser_id(user_id);
-                    shade.setAway(true);
-                    shade.setStatus("Open");
                     shade.setRun_mode(modeSpinner.getSelectedItem().toString());
-                    shade.setThermostat_id(thermostatAdapter.getItem(thermostatSpinner.getSelectedItemPosition()).getId());
+                    if(thermostatSpinner.getSelectedItemPosition() != -1)
+                        shade.setThermostat_id(thermostatAdapter.getItem(thermostatSpinner.getSelectedItemPosition()).getId());
                     new CreateShadeTask().execute();
                 }
             }
@@ -131,16 +152,35 @@ public class CreateShadeActivity extends CustomActivity {
             super.onPostExecute(results);
 
             //done
-            Intent intent = new Intent(CreateShadeActivity.this, ConnectShadeActivity.class);
-            intent.putExtra("SHADE_ID", shade.getId());
-            CreateShadeActivity.this.startActivityForResult(intent, 0);
+            if(isNew) {
+                Intent intent = new Intent(CreateShadeActivity.this, ConnectShadeActivity.class);
+                intent.putExtra("SHADE_ID", shade.getId());
+                CreateShadeActivity.this.startActivityForResult(intent, 0);
+            }
+            else
+                finish();
         }
     }
 
     private class GetRoomsAndThermostatsTask extends AsyncTask<Void, Void, Void>{
         protected  Void doInBackground(Void... voids){
 
+            if(getIntent().hasExtra("SHADE_ID")) {
+                String shadeId = getIntent().getExtras().getString("SHADE_ID");
+                shade = DynamoDBManager.getShade(shadeId);
+                if(shade.getRoom_id() != null)
+                    currentRoom = DynamoDBManager.getRoom(shade.getRoom_id());
+            }
+            else {
+                shade = new Shade();
+                isNew = true;
+            }
+
+
+            thermostatSpinner = (Spinner) findViewById(R.id.spinner_thermostats);
+
             rooms = DynamoDBManager.getRoomList();
+
             SharedPreferences settings = MyApplication.getInstance().getSharedPreferences("user_data", MyApplication.getInstance().MODE_PRIVATE);
             String user_id = settings.getString("user_id", "");
             user = DynamoDBManager.getUser(user_id);
@@ -200,11 +240,13 @@ public class CreateShadeActivity extends CustomActivity {
     }
 
     private void updateThermostats(){
-        thermostatSpinner = (Spinner) findViewById(R.id.spinner_thermostats);
         ArrayList<ThermostatSpinnerObject> thermostatObjects = new ArrayList<>();
 
         for(Thermostat t : thermostats){
-            thermostatObjects.add(new ThermostatSpinnerObject(t.getName(), t.getDeviceId()));
+            ThermostatSpinnerObject tso = new ThermostatSpinnerObject(t.getName(), t.getDeviceId());
+            thermostatObjects.add(tso);
+            if(shade.getId().compareToIgnoreCase(tso.getId()) == 0)
+                currentThermostat = tso;
         }
 
         thermostatAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,thermostatObjects );

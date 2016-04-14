@@ -26,8 +26,14 @@ public class RoomListActivity extends CustomListActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        new GetRoomListTask().execute();
+    }
+
+    @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
-        Intent intent = new Intent(RoomListActivity.this, RoomActivity.class);
+        Intent intent = new Intent(RoomListActivity.this, CreateRoomActivity.class);
         intent.putExtra("ROOM_ID", items.get(position).getId() + "");
         startActivity(intent);
     }
