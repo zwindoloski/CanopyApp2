@@ -235,8 +235,8 @@ public class ScheduleGraphActivity extends CustomActivity {
             if(!closedDataPoints.isEmpty()) graph.addSeries(closedSeries);
             if(!userDataPoints.isEmpty()) graph.addSeries(userSeries);
             if(!roomDataPoints.isEmpty()) graph.addSeries(roomSeries);
-            if(!preservationSeries.isEmpty()) graph.addSeries(roomSeries);
-            if(!convenienceSeries.isEmpty()) graph.addSeries(roomSeries);
+            if(!preservationSeries.isEmpty()) graph.addSeries(preservationSeries);
+            if(!convenienceSeries.isEmpty()) graph.addSeries(convenienceSeries);
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
