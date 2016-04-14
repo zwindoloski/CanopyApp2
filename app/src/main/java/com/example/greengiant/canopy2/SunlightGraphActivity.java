@@ -182,8 +182,8 @@ public class SunlightGraphActivity extends CustomActivity {
             double min = 0.0;
             int horizontalLabels = 2;
 
-            switch (spinnerGranularity.getSelectedItemPosition()){
-                case(0): {
+//            switch (spinnerGranularity.getSelectedItemPosition()){
+//                case(0): {
                     long offset = 86400000;
                     min = maxDate.getTime() - offset;
                     horizontalLabels = 6;
@@ -211,21 +211,21 @@ public class SunlightGraphActivity extends CustomActivity {
                         }
                     });
 
-                    break;
-                }
-                case(1): {
-                    long offset = 604800000;
-                    min = maxDate.getTime() - offset;
-                    horizontalLabels = 4;
-                    break;
-                }
-                case(2): {
-                    long offset = 2592000000L;
-                    min = maxDate.getTime() - offset;
-                    horizontalLabels = 4;
-                    break;
-                }
-            }
+//                    break;
+//                }
+//                case(1): {
+//                    long offset = 604800000;
+//                    min = maxDate.getTime() - offset;
+//                    horizontalLabels = 4;
+//                    break;
+//                }
+//                case(2): {
+//                    long offset = 2592000000L;
+//                    min = maxDate.getTime() - offset;
+//                    horizontalLabels = 4;
+//                    break;
+//                }
+//            }
 
             graph.getViewport().setXAxisBoundsManual(true);
             graph.getViewport().setMinX(min);

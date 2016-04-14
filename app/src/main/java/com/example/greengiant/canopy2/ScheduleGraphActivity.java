@@ -58,6 +58,10 @@ public class ScheduleGraphActivity extends CustomActivity {
     private ArrayList<DataPoint> userDataPoints;
     private PointsGraphSeries<DataPoint> roomSeries;
     private ArrayList<DataPoint> roomDataPoints;
+    private PointsGraphSeries<DataPoint> preservationSeries;
+    private ArrayList<DataPoint> preservationDataPoints;
+    private PointsGraphSeries<DataPoint> convenienceSeries;
+    private ArrayList<DataPoint> convenienceDataPoints;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,8 @@ public class ScheduleGraphActivity extends CustomActivity {
             closedDataPoints = new ArrayList<DataPoint>();
             userDataPoints = new ArrayList<DataPoint>();
             roomDataPoints = new ArrayList<DataPoint>();
+            convenienceDataPoints = new ArrayList<DataPoint>();
+            preservationDataPoints = new ArrayList<DataPoint>();
 
             scheduleIds = new HashMap<DataPoint, String>();
 
@@ -148,6 +154,10 @@ public class ScheduleGraphActivity extends CustomActivity {
                     userDataPoints.add(dp);
                 else if(runMode.compareToIgnoreCase(getString(R.string.room_mode)) == 0)
                     roomDataPoints.add(dp);
+                else if(runMode.compareToIgnoreCase(getString(R.string.preservation_mode)) == 0)
+                    preservationDataPoints.add(dp);
+                else if(runMode.compareToIgnoreCase(getString(R.string.convenience_mode)) == 0)
+                    convenienceDataPoints.add(dp);
             }
 
             scheduleSeries = new PointsGraphSeries<DataPoint>(scheduleDataPoints);
@@ -158,6 +168,8 @@ public class ScheduleGraphActivity extends CustomActivity {
             closedSeries = new PointsGraphSeries<DataPoint>(closedDataPoints.toArray(new DataPoint[0]));
             userSeries = new PointsGraphSeries<DataPoint>(userDataPoints.toArray(new DataPoint[0]));
             roomSeries = new PointsGraphSeries<DataPoint>(roomDataPoints.toArray(new DataPoint[0]));
+            preservationSeries = new PointsGraphSeries<DataPoint>(userDataPoints.toArray(new DataPoint[0]));
+            convenienceSeries = new PointsGraphSeries<DataPoint>(roomDataPoints.toArray(new DataPoint[0]));
 
             setShape(manualSeries, R.drawable.manual);
             setShape(energySeries, R.drawable.leaf);
@@ -165,6 +177,8 @@ public class ScheduleGraphActivity extends CustomActivity {
             setShape(closedSeries, R.drawable.closed);
             setShape(userSeries, R.drawable.user);
             setShape(roomSeries, R.drawable.room);
+            setShape(preservationSeries, R.drawable.preservation);
+            setShape(convenienceSeries, R.drawable.convenience);
 
             setListener(manualSeries);
             setListener(energySeries);
@@ -172,6 +186,8 @@ public class ScheduleGraphActivity extends CustomActivity {
             setListener(closedSeries);
             setListener(userSeries);
             setListener(roomSeries);
+            setListener(preservationSeries);
+            setListener(convenienceSeries);
 
             return null;
         }
@@ -219,6 +235,8 @@ public class ScheduleGraphActivity extends CustomActivity {
             if(!closedDataPoints.isEmpty()) graph.addSeries(closedSeries);
             if(!userDataPoints.isEmpty()) graph.addSeries(userSeries);
             if(!roomDataPoints.isEmpty()) graph.addSeries(roomSeries);
+            if(!preservationSeries.isEmpty()) graph.addSeries(roomSeries);
+            if(!convenienceSeries.isEmpty()) graph.addSeries(roomSeries);
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeZone(TimeZone.getTimeZone("UTC"));

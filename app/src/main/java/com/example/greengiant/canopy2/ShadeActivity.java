@@ -35,6 +35,12 @@ public class ShadeActivity extends CustomActivity {
     @Override
     public void onResume(){
         super.onResume();
+        if(shade != null) {
+            if (shade.isOverriding())
+                overrideLayout.setVisibility(View.VISIBLE);
+            else
+                overrideLayout.setVisibility(View.GONE);
+        }
         new GetShadeTask().execute();
     }
 
@@ -83,6 +89,8 @@ public class ShadeActivity extends CustomActivity {
         overrideLayout = (LinearLayout) findViewById(R.id.override_layout);
         if(shade.isOverriding())
             overrideLayout.setVisibility(View.VISIBLE);
+        else
+            overrideLayout.setVisibility(View.GONE);
 
         spinnerRunMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

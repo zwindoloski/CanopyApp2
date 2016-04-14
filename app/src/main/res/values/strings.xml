@@ -71,6 +71,10 @@
     <string name="schedule_mode">Schedule</string>
     <string name="open_mode">Open</string>
     <string name="closed_mode">Closed</string>
+    <string name="preservation_mode">Preservation</string>
+    <string name="convenience_mode">Convenience</string>
+
+
     <string name="user_mode">Home</string>
     <string name="room_mode">Room</string>
     <string name="username">Username</string>
@@ -87,6 +91,8 @@
     <string-array name="shade_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/schedule_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
@@ -97,6 +103,8 @@
     <string-array name="room_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/schedule_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
@@ -106,6 +114,8 @@
     <string-array name="user_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/schedule_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
@@ -114,6 +124,8 @@
     <string-array name="schedule_run_mode">
         <item>@string/manual_mode</item>
         <item>@string/energy_mode</item>
+        <item>@string/preservation_mode</item>
+        <item>@string/convenience_mode</item>
         <item>@string/open_mode</item>
         <item>@string/closed_mode</item>
     </string-array>
