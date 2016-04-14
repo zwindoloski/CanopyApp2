@@ -39,6 +39,8 @@ public class ScheduleGraphActivity extends CustomActivity {
     String itemName;
     String[] modes;
 
+    boolean alreadyClicked = false;
+
     private ArrayList<Schedule> schedules;
 
     private PointsGraphSeries<DataPoint> scheduleSeries;
@@ -85,12 +87,12 @@ public class ScheduleGraphActivity extends CustomActivity {
 
         addScheduleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            Intent intent = new Intent(ScheduleGraphActivity.this, CreateScheduleActivity.class);
-            intent.putExtra("ITEM_TYPE", itemType);
-            intent.putExtra("ITEM_ID", itemId);
-            System.out.println(modes[0]);
-            intent.putExtra("MODES", modes);
-            startActivity(intent);
+                Intent intent = new Intent(ScheduleGraphActivity.this, CreateScheduleActivity.class);
+                intent.putExtra("ITEM_TYPE", itemType);
+                intent.putExtra("ITEM_ID", itemId);
+                System.out.println(modes[0]);
+                intent.putExtra("MODES", modes);
+                startActivity(intent);
             }
         });
 
@@ -99,6 +101,7 @@ public class ScheduleGraphActivity extends CustomActivity {
     @Override
     public void onResume(){
         super.onResume();
+        alreadyClicked = false;
         new GetShadeTask().execute();
     }
 
@@ -196,10 +199,13 @@ public class ScheduleGraphActivity extends CustomActivity {
             series.setOnDataPointTapListener(new OnDataPointTapListener() {
                 @Override
                 public void onTap(Series series, DataPointInterface dataPoint) {
-                    Intent intent = new Intent(ScheduleGraphActivity.this, ScheduleActivity.class);
-                    intent.putExtra("SCHEDULE_ID", scheduleIds.get(dataPoint));
-                    intent.putExtra("MODES", modes);
-                    startActivity(intent);
+                    if(!alreadyClicked) {
+                        Intent intent = new Intent(ScheduleGraphActivity.this, ScheduleActivity.class);
+                        intent.putExtra("SCHEDULE_ID", scheduleIds.get(dataPoint));
+                        intent.putExtra("MODES", modes);
+                        startActivity(intent);
+                        alreadyClicked = true;
+                    }
                 }
             });
         }
@@ -219,7 +225,7 @@ public class ScheduleGraphActivity extends CustomActivity {
                     paint.setDither(true);
                     System.out.println("paint created");
 
-                    canvas.drawBitmap(bitmap, x - 40, y - 40, paint);
+                    canvas.drawBitmap(bitmap, x - 20, y - 40, paint);
                     System.out.println("done drawing");
                 }
             });
